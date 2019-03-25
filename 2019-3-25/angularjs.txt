@@ -1,0 +1,48 @@
+(1) angularjs 路由
+
+路由功能是由 routeProvider服务 和 ng-view 搭配实现，ng-view相当于提供了页面模板的挂载点，当切换URL进行跳转时，
+不同的页面模板会放在ng-view所在的位置; 然后通过 routeProvider 配置路由的映射。
+
+
+(2) angularjs中的run和config
+https://www.cnblogs.com/shawnhu/p/8462304.html
+
+conifg:在模块加载阶段，对模块进行自定义配置
+config可以注入$stateProvider, $urlRouterProvider, $controllerProvider, $provide, $httpProvider等等provider,
+
+run:是应用中最先执行的方法
+run方法只会在angular启动的时候运行一次，定义全局的数据或逻辑，对全局作用域起作用，$rootScope上内容在多个控制器之间可以共享。
+例如，注册一个全局的事件监听器。每次路由发生变化时候，都执行一个函数来验证用户的权限。
+angular.module('myApp', ['ngRoute'])
+　　.run(function($rootScope, AuthService) {
+　　　　 $rootScope.$on('$routeChangeStart', function(evt, next, current) {
+　　　　　　 // 如果用户未登录　　
+　　　　　　if (!AuthService.userLoggedIn()) {
+　　　　　　　　 if (next.templateUrl === "login.html") {
+　　　　　　　　　　// 已经转向登录路由因此无需重定向
+　　　　　　　　} else {
+　　　　　　　　　　$location.path('/login');
+　　　　　　　　}
+　　　　　　}
+　　　　});
+　　});
+
+(3) angular中自定义指令directive的数据交互
+https://www.jianshu.com/p/f5675fd5c441
+
+在scope中定义：
+=(适合绑定对象形式的复杂参数，比如数组，字典)   双向绑定、
+@(适用于绑定字符串变量或常量)   单项绑定，子组件可以感受到父组件的变化，反之不行    使用@的时候，属性赋值需要使用{{}}表达式、 
+&(以函数的方式读写父作用域的属性)   使用&时候，需要用on开头
+
+案例：<input-son my-data='{{fatherData}}' my-name='fatherName' on-speak='speak()' ></input-son>
+
+如果我们在指令中传入：@？  那么这个?代表的就是当前指令中没有找到所需要的控制器，会将null作为传给link函数的第四个参数。
+
+(4) angularjs中'controllerAs'
+https://www.cnblogs.com/CloudMu/p/3772767.html
+controllerAs的作用就是给对应的controller起一个名字
+我们一般用controllerAs多半是因为要用到我们的controller里面的数据，比如获取一个名叫cells.json，里面包含了所有手机的概况，
+我们需要获取这些数据以便ng-repeate它，一般我们可以在路由和指令里面使用。
+ngjs1.2版本以上，提供了controllerAs，你可以在Router处使用controllerAs，于是你可以在controller中使用this来代替$scope,
+使得Controller更像一个传统的JS类。

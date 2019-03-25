@@ -1,0 +1,58 @@
+用于判断一个值是否为整数
+typeof value === 'number' && parseInt(value, 10) === value;
+
+判断一个值是否为float数
+typeof value === 'number' && !parseInt(value, 10) === value;
+
+
+关于promise
+new Promise((resolve, reject) => {
+    resolve('66');
+})
+.then((res) => { console.log(res); return res; })   // 66
+.then((res) => { console.log(res); return res; })   // 66
+.then((res) => { console.log(res);})                // 66
+.then((res) => { console.log(res);})                // undefined
+
+关于fetch和ajax之间
+https://segmentfault.com/a/1190000012836882
+fetch和ajax不同，fetch的api不是事件机制，而是使用Promise的方式去处理
+(1)fetch('url....', option)
+option存在三个参数
+第一个参数：设置请求方法，method:'POST/GET/DELETE/PUT/PATCH'
+第二个参数：设置头部信息，一般使用JSON数据格式，所以设置ContentType为application/json。
+第三个参数：JSON内容的主体。因为JSON内容是必须的，所以当设置主体时会调用JSON.stringify。
+
+fetch('some-url', {
+  method: 'post',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(content)
+});
+
+
+（2）关于HTTP协议支持的六种请求方法之间的区别。
+https://blog.csdn.net/u010529455/article/details/42918639
+https://blog.csdn.net/varyall/article/details/80895945
+
+PUT：这个方法比较少见。HTML表单也不支持这个。本质上来讲， PUT和POST极为相似，都是向服务器发送数据。
+但它们之间有一个重要区别，PUT通常指定了资源的存放位置，而POST则没有，POST的数据存放位置由服务器自己决定。
+
+举个例子：如一个用于提交博文的URL，/addBlog。
+如果用PUT，则提交的URL会是像这样的”/addBlog/abc123”，其中abc123就是这个博文的地址。
+而如果用POST，则这个地址会在提交后由服务器告知客户端。目前大部分博客都是这样的。
+显然，PUT和POST用途是不一样的。具体用哪个还取决于当前的业务场景
+
+而patch和put之间也存在区别，是对PUT方法的补充，用来对已知资源进行局部更新。
+所谓的局部更新：
+假设我们有一个UserInfo，里面有userId， userName， userGender等10个字段。
+可你的编辑功能因为需求，在某个特别的页面里只能修改userName，这时候的更新怎么做？
+
+人们通常(为徒省事)把一个包含了修改后userName的完整userInfo对象传给后端，做完整更新。
+但仔细想想，这种做法感觉有点二，而且真心浪费带宽(纯技术上讲，你不关心带宽那是你土豪)。
+
+于是patch诞生，只传一个userName到指定资源去，表示该请求是一个局部更新，后端仅更新接收到的字段。
+
+而put虽然也是更新资源，但要求前端提供的一定是一个完整的资源对象，理论上说，如果你用了put，
+但却没有提供完整的UserInfo，那么缺了的那些字段应该被清空。
