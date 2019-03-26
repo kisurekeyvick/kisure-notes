@@ -2,7 +2,8 @@
 
 路由功能是由 routeProvider服务 和 ng-view 搭配实现，ng-view相当于提供了页面模板的挂载点，当切换URL进行跳转时，
 不同的页面模板会放在ng-view所在的位置; 然后通过 routeProvider 配置路由的映射。
-
+ 
+ 
 
 (2) angularjs中的run和config
 https://www.cnblogs.com/shawnhu/p/8462304.html
