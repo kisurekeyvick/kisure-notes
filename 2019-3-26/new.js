@@ -17,16 +17,21 @@ let user = new User('kisure');
 
 /** 
  * new 这一步做了什么？
- * (1) 一个新的空对象被创建并分配给 this
- * (2) 函数体执行。通常它会修改this，为其添加新的属性。
- * (3) 返回this的值
+ * (1) 一个新的空对象obj
+ * (2) 将这个空对象的__proto__成员指向了构造函数对象prototype成员对象
+ * (3) 使用call/apply 执行函数体，修改this指向obj，为obj添加新的属性。
+ * (4) obj或者result
 */
 function newUser(name) {
-    // this = {};   // 隐式创建
-    // 添加属性到this上
-    this.name = name;
-    // .....
-    return this;    // 隐式返回
+    const obj = {};
+    obj._proto_ = 目标构造函数.prototype;
+    const args = [].slice.call(arguments);
+    const result = 目标构造函数.apply(obj, args);
+
+    if (typeof result === 'object' && result !== null || typeof result === 'function')
+        return result;
+
+    return newObj;
 }
 
 /**
