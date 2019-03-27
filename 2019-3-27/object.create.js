@@ -1,6 +1,7 @@
 /** 
  * Object.create()
  * https://www.jianshu.com/p/28d85bebe599
+ * https://www.jianshu.com/p/358d04e054b2
  * https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create
  * 
  * 方法创建一个新对象，使用现有的对象来提供新创建的对象的__proto__
