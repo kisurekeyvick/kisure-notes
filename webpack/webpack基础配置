@@ -1,0 +1,22 @@
+(1)yarn init -y
+    这一步进行初始化一些安装依赖。
+    此命令将引导您完成交互式会话以创建 package.json文件。
+
+(2)yarn add webpack webpack-cli -D
+    -D代表的是开发依赖，上线时候是不需要的。 
+
+(3)在当前的项目中创建一个文件：webpack.config.js
+    webpack是node写出来的，所以需要node写法
+
+    let path = require('path');
+
+    module.exports = {
+        mode: 'development',   // 代表模式，默认存在两种：production(生产模式)、development(开发模式)
+        entry: './src/index.js',    // 入口文件
+        output: {
+            filename: 'bundle.js',  // 打包以后的文件名
+            path: path.resolve(__dirname, 'dist'),  //path是打包以后代码存放的位置，并且这个位置是一个绝对路径
+            // 因为需要绝对路径，所以这里要用到node.js中的path.
+            // __dirname, 'dist' 的意思就是：以当前目录下产生一个dist目录。
+        }
+    };
