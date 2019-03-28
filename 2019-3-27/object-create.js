@@ -22,6 +22,14 @@ console.log(obj1);  // 创建出来的obj1里面什么属性都没有，就是�
 */
 
 /**
+ * 关于Object.create()和Object.setPrototypeOf({}, null);
+ * 注意的是，这两个方法都是ES5的方法
+ * 以下两个方法都是创建一个不以Object的原型为构造函数（也就是说这个对象是没有原型的）的对象。
+ */
+const obj2 = Object.create(null);
+const obj3 = Object.setPrototypeOf({}, null);
+
+/**
  * 总结：
  * 
  * Object.cerate() 必须接收一个对象参数，创建的新对象的原型指向接收的参数对象，
@@ -29,4 +37,3 @@ console.log(obj1);  // 创建出来的obj1里面什么属性都没有，就是�
  * 可以通过Object.create(null) 创建一个干净的对象，也就是没有原型，
  * 而 new Object() 创建的对象是 Object的实例，原型永远指向Object.prototype
  */
-
