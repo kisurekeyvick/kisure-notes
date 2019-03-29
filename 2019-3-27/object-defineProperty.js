@@ -38,6 +38,16 @@ Object.defineProperty(obj, 'test', {
  * Object.defineProperties()
  * 方法直接在一个对象上定义一个或多个新的属性或修改现有属性，并返回该对象
  */
+Object.defineProperties(obj, {
+    'property1': {
+        value: true,
+        writable: true
+    },
+    'property2': {
+        value: 'Hello',
+        writable: false
+    }
+});
 
 /**
  * js存在三种类型的属性：

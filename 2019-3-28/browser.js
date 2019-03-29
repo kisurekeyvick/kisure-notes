@@ -63,3 +63,57 @@ div.outerHTML = '<p>A new element!</p>';
 
 // Wow! The div is still the same!
 alert(div.outerHTML); // <div>Hello, world!</div>
+
+/**
+ * textContent
+ * 纯文本，它提供对元素的text的访问权限，也就是只提供文本，去掉所有的tags
+ */
+/*
+    html:
+    <div id="news">
+        <h1 id='kisure'>Headline!</h1>
+        <p>Martians attack people!</p>
+    </div>
+ */
+const h1 = document.querySelector('#kisure');
+console.log(h1.textContent);    // Headline!
+
+/**
+ * hidden属性
+ * hidden与style='display:none'的运行方式相似，但是写法更加简洁
+ */
+
+/**
+ * nodeType属性
+ * nodeType 属性提供了一个获取 DOM 节点类型的旧方法。
+ * elem.nodeType == 1 是元素节点
+ * elem.nodeType == 3 是文本节点
+ * elem.nodeType == 9 是 document 对象
+ */
+let elem = document.body;
+
+// 让我们检查一下它是什么？
+alert(elem.nodeType); // 1 => element
+
+// 第一个子节点是
+alert(elem.firstChild.nodeType); // 3 => text
+
+// 对于文档对象，类型是 9
+alert( document.nodeType ); // 9
+
+/**
+ * 获取标签名：nodeName 和 tagName
+ */
+console.log(document.body.nodeName);    // BODY
+console.log(document.body.tagName);     // BODY
+// tagName和nodeName之间的差别
+/**
+ * tagName 属性仅用于 Element 节点
+ * nodeName 是为任意 Node 定义的:
+ *      (1)对于元素，它的意义与 tagName 相同
+ *      (2)对其他节点类型（text、comment 等），则是拥有一个字符串的节点类型
+ *          comment类型是注释节点
+ *          text类型是文本节点， 文本节点就是文本内容
+ * 
+ * 简单的说：tagName 只被元素节点支持（因为它起源于 Element 类），而 nodeName 则可以说明其他节点类型。
+ */
