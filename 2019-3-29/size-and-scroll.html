@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #parent {
+            position: relative;
+            height: 500px;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        #child {
+            position: absolute;
+            background-color: #ddd;
+            top:200px;
+            left:200px;
+            height: 100px;
+            width: 100px;
+            border: 15px solid #ddd;
+            padding: 50px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id='parent'>
+        <div id='child'>content</div>
+    </div>
+</body>
+</html>
+<script src="./size-and-scroll.js"></script>
