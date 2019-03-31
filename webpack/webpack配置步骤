@@ -1,0 +1,7 @@
+1.初始化： yarn init / npm init 通过交互式会话创建一个 package.json
+    # 跳过会话，直接通过默认值生成 package.json
+    yarn init -y    / npm init -y
+
+2.初始化添加 yarn add webpack webpack-cli
+
+    webpack打包以后

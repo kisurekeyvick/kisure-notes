@@ -11,7 +11,7 @@
     let path = require('path');
 
     module.exports = {
-        mode: 'development',   // 代表模式，默认存在两种：production(生产模式)、development(开发模式)
+        mode: '',   // 代表模式，默认存在两种：production(生产模式)、development(开发模式)
         entry: './src/index.js',    // 入口文件
         output: {
             filename: 'bundle.js',  // 打包以后的文件名

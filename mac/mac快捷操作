@@ -1,0 +1,33 @@
+// ls 查看目录下的文件
+ls 查看目录下的文件
+ls -a 查看隐藏的文件
+ls -l 以一个列表的形式，把所有的内容全部输出出来
+
+// mv 移动，重命名文件
+mv a b  把a文件重命名为b
+mv Downloads/love.txt ~/Documents/  把下载目录下的 love.txt 文件，移动到文档目录中
+
+// cp 复制文件和文件夹
+cp a b  把a文件复制为b文件
+
+// rm 删除文件或者文件夹
+rm a  删除a文件
+因为删除命令敲下以后，终端会提示，你需要输入yes表示同意。（
+    一般 linux 会给你提示，你需要输入 yes 同意，才能删除。但是 mac 不会给提示，直接就删除掉了
+）
+rm -f a 
+
+// mkdir 新建文件夹
+mkdir a  创建一个文件夹a
+mkdir a b c d   创建多个文件夹
+
+// touch 新建文件
+touch a  创建一个叫a的文件
+touch a.txt b.jpg c.doc d.pdf   创建任意文件。只需要加上不同的后缀就可以了。
+
+// pwd 看看自己在哪个目录下
+
+// less 查看文本文件
+less webpack.config.js  查看webpack.config.js的内容
+
+// shift + Q 退出
