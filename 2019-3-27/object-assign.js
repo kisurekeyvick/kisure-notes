@@ -104,3 +104,25 @@ function deepCopy(source, copyDeep) {
     });
     return newObject;
 }
+
+/**
+ * 练习题(1)：
+ */
+var a = { age: 12 };
+var b = { age: 13 };
+var c = Object.assign(a, b);
+b.age = 14;
+console.log(a.age); console.log(c.age); console.log(b.age); 
+// 13 13 14
+
+c.age = 15;
+console.log(c.age); console.log(a.age); console.log(b.age);
+// 15 15 14
+
+/**
+ * 练习题(2):
+ */
+const a = {age: 12};
+const b = Object(a);
+a.age = 13
+console.log(b.age); // 13
