@@ -101,3 +101,12 @@ Math.max(1,2,3,4);
 [1,2,3,4].findIndex(item => item === 2);
 
 
+/**
+ * 每一项设置值
+ */
+/**
+ * fill 是ES6方法
+ * 语法：array.fill(value, start, end)sss
+ */
+ [1,2,3,4].fill(true);   // [true, true, true, true]
+ [1,2,3,4].fill(true, 2,4); // [1, 2, true, true]
