@@ -222,7 +222,7 @@ function Example() {
                 hook1.next => hook2
                 state2 === hook2.memoizedState
                 hook2.next => hook3
-                state3 === hook2.memoizedState
+                state3 === hook3.memoizedState
 
             每个在FunctionalComponent中调用的useState都会有一个对应的Hook对象，
             他们按照执行的顺序以类似链表的数据格式存放在Fiber.memoizedState上
