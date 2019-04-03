@@ -8,3 +8,5 @@
 <!4/1~4-7>
 1.搭建react项目，选择最新版本react，使用react hooks
 2.试用react最新的生命周期
+3.了解serverworker
+4.了解WebSocket
