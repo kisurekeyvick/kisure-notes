@@ -10,3 +10,4 @@
 2.试用react最新的生命周期
 3.了解serverworker
 4.了解WebSocket
+5.了解svg
