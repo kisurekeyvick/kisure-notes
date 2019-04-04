@@ -101,5 +101,41 @@ document.onreadystatechange = function() {
  * 非标准化的特性，dataset
  * 当我们编写 HTML，会用到很多标准特性。但是哪些是标准化的哪些不是，怎么区分它们？首先，看看它们是否起作用？
  * 
- * 有时候非标准化特性常常用于在 HTML 中定义一些 JavaScript 数据，或者是给 HTML 元素打上“标记”
+ * 用途：
+ * (1)有时候非标准化特性常常用于在 HTML 中定义一些 JavaScript 数据，或者是给 HTML 元素打上“标记”
+ * 例如：
+    <div show-info="name"></div>
+        <!-- 这里要显示 "age" -->
+    <div show-info="age"></div>
+
+    for(let div of document.querySelectorAll('[show-info]')) {
+        // 插入相应的数据
+        let field = div.getAttribute('show-info');
+        div.innerHTML = user[field]; // Pete，然后是年龄
+    }
+
+    (2)我们还可以应用在元素的样式上
+    <style>
+        .order[order-state="new"] {
+            color: green;
+        }
+
+        .order[order-state="pending"] {
+            color: blue;
+        }
+    </style>
+
+    <div class="order" order-state="new">A new order.</div>
+    <div class="order" order-state="pending">A pending order.</div>
 */
+
+/**
+ * 总结：
+ * (1) Attributes —— 写在 HTML 中。
+ * (2) Properties —— 是一个 DOM 对象
+ * 
+ * 以下为简略对比：
+ 	        Properties	                            Attributes
+    类型	一些值，标准化的属性值在规范中有类型描述	字符串
+    名字	键名大小写敏感	                          键名大小写不敏感
+ */
