@@ -20,3 +20,38 @@
             // __dirname, 'dist' 的意思就是：以当前目录下产生一个dist目录。
         }
     };
+
+(4)package.json中写入‘script’
+    script 是指定了npm的脚本，
+
+    例如：
+    "scripts": {
+    　　"dev": "node build/dev-server.js",
+    　　"build": "node build/build.js",
+    　　"unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
+    　　"e2e": "node test/e2e/runner.js",
+    　　"test": "npm run unit && npm run e2e"
+    }
+
+    npm run dev 就会自动运行 build目录下的dev-server.js文件
+    npm run build 就会自动运行 build目录下的build.js 文件
+
+(5)webpack4中内置了一个开发服务，webpack-dev-server。
+    指令：yarn add webpack-dev-server
+
+    webpack-dev-server是一个小型的Node.js Express服务器,它使用webpack-dev-middleware来服务于webpack的包.
+
+    webpack-dev-server默认会以当前目录为基本目录,除非你制定它.
+    订制：webpack-dev-server --content-base build/
+    上述命令是在命令行中执行的,它将build目录作为根目录.有一点需要注意的是:webpack-dev-server生成的包并没有放在你的真实目录中,而是放在了内存中.
+
+(6)plugins
+    这是一个数组，放着所有的webpack插件。
+
+    (1) html-webpack-plugin
+    
+
+
+
+
+     

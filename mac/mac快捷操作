@@ -17,6 +17,8 @@ rm a  删除a文件
 ）
 rm -f a 
 
+rm -rf a  删除某个文件或者文件夹
+
 // mkdir 新建文件夹
 mkdir a  创建一个文件夹a
 mkdir a b c d   创建多个文件夹
