@@ -21,11 +21,13 @@ console.log('outerHTML:'+test1.outerHTML);
 console.log('innerText:'+test1.innerText);
 console.log('outerText:'+test1.outerText);
 
+// test1.outerHTML = '<div>hello outerHTML</div>';
+
 /**
- * innerText 和 outerText的区别
+ * innerText 和 outerText 的区别
  * 返回值差不多，但是赋值是有区别的
  * innerText赋值，是直接在对应的dom中添加对应的html内容
- * outerText赋值，是直接将对饮的dom替换成文本
+ * outerText赋值，是直接将对应的dom替换成文本
  */
 document.onreadystatechange = function() {
     if (document.readyState === 'complete') {
@@ -91,16 +93,16 @@ dom.style.fontSize = '15px';
  * 语法：elem.matches(css)
  * 它只会检查 elem 是否匹配给定的 CSS 选择器，它返回 true 或者 false。
  * 使用场景：当我们迭代元素（例如数组或者一些其他内容）并试图过滤那些我们感兴趣的元素时，这个方法会很方便。
- * 
- *  <a href="http://example.com/file.zip">...</a>
+
+    <a href="http://example.com/file.zip">...</a>
     <a href="http://ya.ru">...</a>
 
     <script>
         // 不一定是 document.body.children，也可以是任何集合
         for (let elem of document.body.children) {
             if (elem.matches('a[href$="zip"]')) {
-            alert("The archive reference: " + elem.href );
-            }
+                alert("The archive reference: " + elem.href );
+            } 
         }
     </script>
  */
