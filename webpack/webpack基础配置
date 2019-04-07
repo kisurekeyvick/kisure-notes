@@ -47,6 +47,7 @@
 
 (6)plugins
     这是一个数组，放着所有的webpack插件。
+    plugins是没有填写顺序的先后概念的，所以放心大胆的填写。
 
     (1) html-webpack-plugin
         html-webpack-plugin 插件是用于编译 Webpack 项目中的 html 类型的文件，如果直接将 html 文件置于 ./src 目录中，
@@ -71,6 +72,12 @@
             })
         ]
 
+    (2) mini-css-extract-plugin
+        下载对应的插件：sudo cnpm install mini-css-extract-plugin -D
+        该插件的作用就是抽离css样式，异步加载不重复编译，性能更好，只针对CSS,然后再 link 进页面
+        将CSS提取为独立的文件的插件，对每个包含css的js文件都会创建一个CSS文件，支持按需加载css和sourceMap。
+        把 js 中 import 导入的样式文件代码，打包成一个实际的 css 文件，结合 html-webpack-plugin，在 dist/index.html 中以 link 插入 css 文件；默认将 js 中 import 的多个 css 文件，打包时合成一个
+
 (7)loader的作用就是将源代码进行转化为模块
     loader的特点是希望单一，每一个loader都有自己的特别的方法功能。
     loader的用法：如果只用一个loader那么可以填入字符串，如果是多个loader那么使用[]的形式
@@ -91,9 +98,29 @@
                 // loader也可以写成对象的方式,写成对象的形式的好处就是可以由一个options进行配置
                 { test: /\.css$/, use: [{
                     loader:'style-loader',
-                    options: { }
+                    // http://webpack.html.cn/loaders/style-loader.html 这个是style-loader的一些配置
+                    options: {
+                        insertAt: 'top'     // options可以做对应的style-loader配置，insertAt代表的是生成的style插入的位置，top代表的是顶部
+                    }
                 }, 'css-loader'] },
+
+                { 
+                    test: /\.scss$/, 
+                    use: [
+                            {
+                                loader: 'style-loader',
+                                options: {
+                                    insertAt: 'top'     // options可以做对应的style-loader配置，insertAt代表的是生成的style插入的位置，top代表的是顶部
+                                }
+                            }, 
+                            'css-loader',
+                            'sass-loader'   //sass-loader的作用就是将对应的scss文件转化为css文件
+                        ]
+                }，
 
                 { test: /\.js$/, use:[] }
             ]
         }
+
+(8) const devMode = process.env.NODE_ENV !== 'production';
+    process.env.NODE_ENV !== 'production' 用于判断是不是生产环境
