@@ -124,3 +124,18 @@
 
 (8) const devMode = process.env.NODE_ENV !== 'production';
     process.env.NODE_ENV !== 'production' 用于判断是不是生产环境
+
+(9) postcss-loader
+        postcss-loader 它提供了一种方式用 JavaScript 代码来处理 CSS
+        postcss-loader 用来对.css 文件进行处理，并添加在 style-loader 和 css-loader 之后
+
+        Autoprefixer是一个流行的 PostCSS 插件，其作用是为 CSS 中的属性添加浏览器特定的前缀
+        Autoprefixer 可以根据需要指定支持的浏览器类型和版本，自动添加所需的带前缀的属性声明。
+        webpack4+，我们通过postcss.config.js进行配置postcss-loader, 因为postcss-loader调用的时候默认会调用这个配置文件
+
+        postcss.config.js配置：
+            module.exports = {
+                plugins: [
+                    require('autoprefixer')
+                ]
+            };
