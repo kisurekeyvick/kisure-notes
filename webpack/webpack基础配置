@@ -49,9 +49,51 @@
     这是一个数组，放着所有的webpack插件。
 
     (1) html-webpack-plugin
-    
+        html-webpack-plugin 插件是用于编译 Webpack 项目中的 html 类型的文件，如果直接将 html 文件置于 ./src 目录中，
+        用 Webpack 打包时是不会编译到生产环境中的。因为 Webpack 编译任何文件都需要基于配置文件先行配置的
 
+        安装：yarn add html-webpack-plugin --dev 或者 npm install --save-dev html-webpack-plugin
 
+        webpack.config.js 配置文件，是最简用法 html-webpack-plugin 甚至未传递任何参数，
+        但它基于这个原则 Entrypoint undefined = index.html 当未定义此插件的入口时，默认为 index.html,输出同样是 index.html。
+        所以未定义入口时，不论 ./src 下有任何名称的 html 文件都不会被打包处理，但是会默认输出 index.html 文件
 
+        使用：
+        plugins: [  // 数组 放着所有的webpack插件
+            new HtmlWebpackPlugin({
+                template: './src/index.html',   // 选取相关的html作为模板
+                filename: 'index.html',         // 打包以后的html文件名字也叫做index.html
+                minify: {                       // 用于压缩html的，最小化html
+                    removeAttributeQuotes: true,    // 删除html上的属性的双引号
+                    collapseWhitespace: true,       // 折叠空行，将html压缩成一行
+                },
+                hash: true,                         // 希望生成的js代码引用的时候，使用hash戳，用于解决缓存的问题
+            })
+        ]
 
-     
+(7)loader的作用就是将源代码进行转化为模块
+    loader的特点是希望单一，每一个loader都有自己的特别的方法功能。
+    loader的用法：如果只用一个loader那么可以填入字符串，如果是多个loader那么使用[]的形式
+    loader的执法顺序：默认是从右到左的,从下到上执行
+    loader还可以写成对象的方式
+
+    （1）css-loader 和style-loader
+        css-loader: 加载.css文件
+        style-loader:使用<style>将css-loader内部样式插入到head标签中
+        添加对应的loader的npm包：yarn add css-loader style-loader -D
+
+        案例：
+        module: {   // 模块
+            rules: [    // 规则
+                // css-loader   解析@import这种语法
+                // style-loader 将css插入到head标签中
+                { test: /\.css$/, use: ['style-loader', 'css-loader'] },
+                // loader也可以写成对象的方式,写成对象的形式的好处就是可以由一个options进行配置
+                { test: /\.css$/, use: [{
+                    loader:'style-loader',
+                    options: { }
+                }, 'css-loader'] },
+
+                { test: /\.js$/, use:[] }
+            ]
+        }
