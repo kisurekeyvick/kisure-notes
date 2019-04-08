@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #container {
+            height: 610px;
+            width: 100%;
+        }
+
+        #box {
+            display: flex;
+            height: 200px;
+            width: 100%;
+        }
+
+        #box-left {
+            flex: 0 0 50px;
+            background-color: palegoldenrod;
+        }
+
+        #box-center {
+            flex:1;
+        }
+
+        #box-right {
+            flex: 0 0 50px;
+            background-color: palegoldenrod;
+        }
+
+        #container-two {
+            width: 200px;
+            height: 200px;
+            background-color: aliceblue;
+            text-align: center;
+        }
+
+        #box-two {
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+            background-color: aqua;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id='container'>
+        <div id='box'>
+            <div id='box-left'>left</div>
+            <div id='box-center'>center</div>
+            <div id='box-right'>right</div>
+        </div>
+    </div>
+
+    <div id='container-two' class="outer">
+        <div id='box-two' class="inner">content</div>
+    </div>
+</body>
+</html>
+<script src="./mouseover-or-out-mouseenter-or-leave.js"></script>

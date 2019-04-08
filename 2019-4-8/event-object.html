@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            position: relative;
+            height: 610px;
+        }
+
+        #container {
+            position: relative;
+            height: 400px;
+            width: 400px;
+            top:50%;
+            left:50%;
+            transform: translate(-50%, -50%);
+            background-color: palegoldenrod;
+        }
+
+        #content {
+            position: absolute;
+            height: 300px;
+            width: 300px;
+            top:50%;
+            left:50%;
+            transform: translate(-50%, -50%);
+            background-color: #ddd;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id='container'>
+        <div id='content'>content</div>
+    </div>
+
+    <button id='btn'>点击我</button>
+</body>
+</html>
+<script src="./event-object.js"></script>
