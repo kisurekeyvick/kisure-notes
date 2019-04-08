@@ -1,0 +1,42 @@
+https://www.jianshu.com/p/b3d86ddfd555
+
+1.package.json是什么？
+    在Node.js中，模块是一个库或框架，也是一个Node.js项目。
+    Node.js项目遵循模块化的架构，当我们创建了一个Node.js项目，意味着创建了一个模块，
+    这个模块的描述文件，被称为package.json。
+
+    所以package.json是描述模块的文件
+
+2.package.json属性说明
+    (1)name - 包名.
+    (2)version - 包的版本号。
+    (3)description - 包的描述。
+    (4)author - 包的作者，它的值是你在https://npmjs.org网站的有效账户名，遵循“账户名<邮件>”的规则，例如：kisurekeyvick <zttaijue1207@163.com>。
+    (5)contributors - 包的其他贡献者。
+    (6)dependencies / devDependencies - 生产/开发环境依赖包列表。它们将会被安装在 node_module 目录下。
+        安装方式：
+            npm install packagename --save：将插件安装进项目，并写入package.json的dependencies中
+            npm install packagename --save-dev：将插件安装进项目，并写入package.json的devDependencies中
+            --save表示保存到package.json中（默认为dependencies），-dev表示保存在package.json的devDependencies中
+
+        下载方式：
+            拿到别人的项目时，会有package.json文件说明了项目依赖的插件
+            npm install：默认会安装两种依赖
+            npm install --production：只安装dependencies而不安装devDependencies
+
+        区别：
+            dev是develop的缩写，即表示开发模式，所以：
+            devDependencies保存的依赖是只用于开发环境，不用于生产环境；
+            dependencies保存的依赖用于生产环境。
+
+        生产环境与开发环境：
+            所谓开发环境，就是指开发阶段，比如webpack，gulp这些工具，都只是在开发阶段需要，
+            一旦项目真正投入使用，便不再依赖这些插件，所以将其安装在devDependencies即可。
+
+            生产环境，则表示项目真正投入使用时，此时仍然需要依赖的插件则需要安装在dependencies中，
+            比如vue，vue-router，jQuery这些，dependencies中没有这些插件，项目真实使用时就会出错。
+    (7)main
+        main属性指定了加载时的入口文件，当使用require()语法来加载一个模块时，就会查看package.json文件的main属性，
+        main属性的属性值就是要加载的模块。
+
+3.
