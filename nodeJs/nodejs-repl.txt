@@ -1,0 +1,42 @@
+/**
+ * Node.js REPL(交互式解释器)
+
+Node.js REPL表示一个电脑的环境，类似 Window 系统的终端或 Unix/Linux shell，我们可以在终端中输入命令，并接收系统的响应。
+Node 的交互式解释器可以很好的调试 Javascript 代码。
+
+打开：cmd打开，输入node，这样就能启动Node的终端
+
+(1) 下划线(_)变量
+    使用下划线(_)获取上一个表达式的运算结果
+
+    $ node
+    > var x = 10
+    undefined
+    > var y = 20
+    undefined
+    > x + y
+    30
+    > var sum = _
+    undefined
+    > console.log(sum)
+    30
+    undefined
+    >
+
+(2) REPL 命令
+    ctrl + c - 退出当前终端。
+    ctrl + c 按下两次 - 退出 Node REPL。
+    ctrl + d - 退出 Node REPL.
+    向上/向下 键 - 查看输入的历史命令
+    tab 键 - 列出当前命令
+    .help - 列出使用命令
+    .break - 退出多行表达式
+    .clear - 退出多行表达式
+    
+    .load:      cmd打开 -> 找到对应js的路径，进入当前文件夹中 -> .load 对应你要载入的js文件
+    .editor:    进入编辑模式(ctrl-D 完成，ctrl-C 取消)
+    .save：     在node环境中输入：.save 对应的js
+*/
+
+var kis = 1;
+console.log(kis);
