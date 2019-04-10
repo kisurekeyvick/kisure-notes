@@ -24,7 +24,6 @@ function handle(ev) {
 /**
  * keydown 和 keypress之间的区别
  * 当按钮被按下时，发生 keydown 事件
- * 完整的 key press 过程分为两个部分：1. 按键被按下；2. 按键被松开。
  * 
  * keydown在按下的时候返回键盘上的代码值，然后由TranslateMessage函数翻译成字符，并且由keypress返回字符值。
  * 所以也可以理解为，keydown获取键盘的代码值，而keypress获取键盘的字符值（ASCII字符）。
