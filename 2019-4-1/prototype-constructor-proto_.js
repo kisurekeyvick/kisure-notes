@@ -50,10 +50,15 @@ Person.__proto__ === Function.prototype;
 
 Person.prototype.__proto__ === Object.prototype    // 因为所有函数都是由Object继承过来的
 
-Object.prototype.__proto__ === null;
+Function.__proto__ === Function.prototype;
+
+Function.prototype.__proto__ === Object.prototype;
 
 Object.__proto__ === Function.prototype;
 
+Object.prototype.__proto__ === null;
+
+Object.prototype.constructor === Object;
 
 /**
  * 这是一个测试
