@@ -18,7 +18,7 @@ let dropWhile = (arr, func) => {
 
     return arr;
 };
-dropWhile([1, 2, 3, 4, 2], n => n >= 3); // [3,4]
+dropWhile([1, 2, 3, 4, 2], n => n >= 3); // [3,4, 2]
 
 // 上面那个方法很扯淡，自己重写的一个dropWhile过滤fn中的条件
 dropWhile = (arr, func) => {

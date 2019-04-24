@@ -10,7 +10,7 @@ let array = {
 };
 
 let arr = Array.from(array);
-console.log(arr)  // [ undefined, undefined, undefined, undefined ]
+console.log(arr);  // [ undefined, undefined, undefined, undefined ]
 /**
  * 会发现结果是长度为4，元素均为undefined的数组，由此可见，
  * 要将一个类数组对象转换为一个真正的数组，必须具备以下条件：
