@@ -41,7 +41,14 @@ var button = {
 document.addEventListener('click', button.click.bind(button));
 
 /** 
+ * https://juejin.im/post/5bae050ee51d450e827b55f1
+ * https://segmentfault.com/a/1190000018779762
+ * 
  * generator
+ * 什么是generator:
+ * Generator 函数是一个状态机，封装了多个内部状态。执行 Generator 函数会返回一个遍历器对象，
+ * 也就是说，Generator 函数除了状态机，还是一个遍历器对象生成函数。返回的遍历器对象，
+ * 可以依次遍历 Generator 函数内部的每一个状态。
  */
 
 /**
@@ -76,6 +83,28 @@ document.addEventListener('click', button.click.bind(button));
  * 主要注意的是：
  * 在 generator 中不仅可以使用 yield，return 语句也会返回相同的对象，
  * 但是当执行完第一个 retrurn 语句时，迭代就会停止了。
+ 
+    案例：
+    function* Gen(val) {
+        val = yield val * 2;
+        console.log('内部运行val', val);
+        yield val;
+    }
+
+    let generator = Gen(2);
+    generator.next(666);        // {value: 4, done: false}
+    generator.next();           // 内部运行val undefined    {value: undefined, done: false}
+
+    解释：
+        I:  yield表达式本身没有返回值(就是说let a=yield ;会返回undefined)，或者说总是返回undefined
+            案例中val = yield val * 2; val始终是undefined
+        II: next方法可以带一个参数，该参数就会被当作上一个yield表达式的返回值
+            注意，是整个表达式的返回值而不只是yield 后方的值。
+            例如 let a=yield.......... 参数会是a 的值并且会覆盖表达式之前的值
+        III: 由于next方法的参数表示上一个yield表达式的返回值，所以在第一次使用next方法时，传递参数是无效的。
+             V8 引擎直接忽略第一次使用next方法时的参数，
+             只有从第二次使用next方法开始，参数才是有效的。
+             从语义上讲，第一个next方法用来启动遍历器对象，所以不用带有参数。
  */
 
 // 针对于在generator中执行return
@@ -196,6 +225,4 @@ console.log(result2);
             const gen = generator();
             gen.throw('Something bad'); // Error Uncaught Something bad
             gen.next(); // {value: undefined, done: true}
-
-            
  */
