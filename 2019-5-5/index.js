@@ -69,6 +69,9 @@ Array.prototype.kisureReduce = function(...args) {
         /** 
          * 如果reduce在没有第二个参数的时候，会把数组的第一项作为回调的初始值
          * 例如：第一项并不一定是a[0]
+         *      如：a = [,5,,4,3,,5,7,8,9]
+         *      0 in a // false
+         *      1 in a // true
          */
         while(index < len && !(index in arr)) {
             index ++;
@@ -105,3 +108,57 @@ console.log([1,2,3,4].kisureReduce((pre, cur, index, arr) => {
     pre += cur;
     return pre;
 }, 100));
+
+/** 
+ * filter
+ */
+Array.prototype.kisureFilter = function(fn, context = null) {
+    let arr = this;
+    let len = arr.length;
+    let index = 0;
+    let k;
+    let newArr = [];
+
+    if (typeof fn === 'function') {
+        throw new TypeError(fn + ' is not a function');
+    }
+
+    while(index < len) {
+        if (index in arr) {
+            let result = fn.call(context, arr[index], index, arr);
+            if (result) {
+                // 如果返回的值为true，那么代表的是加进新数组
+                newArr[k++] = arr[index];
+            }
+        }
+
+        index ++;
+    }
+
+    return newArr;
+}
+
+/** 
+ * find和findIndex
+ */
+Array.prototype.kisureFind = function(fn, context = null) {
+    let arr = this;
+    let len = arr.length;
+    let index = 0;
+
+    if (typeof fn !== 'function') {
+        throw new TypeError(fn + ' is not a function');
+    }
+
+    while(index < len) {
+        if (index in arr) {
+            let result = fn.call(context, arr[index], index, arr);
+            if (result) {
+                return arr[index];
+            }
+        }
+        index ++;
+    }
+
+    return undefined;
+}

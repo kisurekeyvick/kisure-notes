@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        div {
+            position: relative;
+            z-index: 1;
+            display: inline-block;
+            margin: 1em;
+            width: 400px;
+            height: 40px;
+            vertical-align: top;
+        }
+
+        label {
+            height: calc(100% - 1em);
+            text-align: left;
+            pointer-events: none;
+        }
+
+        label:before, label:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 10px);
+            border-bottom: 1px solid #B9C1CA;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <label></label>
+    </div>
+</body>
+</html>
+<script>
+    function run() {
+        [1].reduce((pre, cur) => {
+            console.log(cur);
+        }, '')
+    }
+
+    run();
+</script>
