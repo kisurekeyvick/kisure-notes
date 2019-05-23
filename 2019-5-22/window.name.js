@@ -62,6 +62,11 @@
  */
 
 /** 
+ * contentWindow这是个只读属性，返回指定的iframe的窗口对象。
+ * 它虽然不是标准的一部分，但各个主流浏览器都支持。
+ */
+
+/** 
  * iframe
  */
 var iframe = document.createElement("iframe");

@@ -45,56 +45,18 @@ const dom_Div: HTMLElement = document.getElementById("#Div")!
         你可以选择把这些声明放入 .ts 或者 .d.ts 里。在你实际的项目里，我们强烈建议你应该把声明放入 .d.ts 里。
         如果一个文件有扩展名 .d.ts，这意味着每个顶级的声明都必须以 declare 关键字作为前缀。
         这有利于向作者说明，在这里 TypeScript 将不会把它编译成任何代码，同时他需要确保这些在编译时存在。
+
+        关于declare的作用！！！！：
+        例如，有一个js库，不是用ts编写的，于是它没有typescript编译器可以检查的类型声明。
+              当我运行我的代码时，module来自这个js库，的确存在，同时也可以是console.log它。
+              该module对象也有键，例如'module.hot'，
+              键可以有值但是VSCode中的TypeScript设计时编译器至少在它下面画出一个红色的波浪形 property 'hot' does not exist
+
+              但它确实存在，要使TypeScript编译器同意，请声明它，就像：declare let module: any
+
+              如果您删除关键字declare，只是写let module: any，它将不会编译说'module' already exists。
  * 
  * (2) 变量
  *      
  */
 
- /** 
-  * 2.1 接口
-  */
-/** 第一个使用内联注解 */
-declare const myPoint1: { x: number; y: number };
-
-/** 第二个使用接口 */
-interface Point {
-  x: number;
-  y: number;
-}
-
-declare const myPoint2: Point;
-
-/** 
- * 使用接口方式定义类型的好处在于：如果有人创建了一个基于 myPoint 的库来添加新成员, 
- *      他们可以轻松将此成员添加到 myPoint 的现有声明中。
- * 
- * 因为 TypeScript 接口是开放式的，这是 TypeScript 的一个重要原则，它允许你使用接口模仿 JavaScript 的可扩展性。
- */
-interface Point {
-    x: number,
-    y: number
-}
-
-declare const myPoint3: Point;
-
-interface Point {
-    z: number
-}
-
-myPoint3.z
-
-/** 
- * 2.2 类也可以实现接口
- * 如果你希望在类中使用必须遵循的接口（类）或是别人定义的对象结构，可以使用 implements 关键字来确保兼容性。
- * implements 限制了类实例的结构。
- *  类似：let foo: Person = new Me();
- */
-interface Person {
-    age: number;
-    weight: number;
-}
-
-class Me implements Person {
-    age: number;
-    weight: number;
-}
