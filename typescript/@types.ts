@@ -23,7 +23,7 @@ const dom_Div: HTMLElement = document.getElementById("#Div")!
         {
             "compilerOptions": {
                 "types" : [
-                "jquery"
+                    "jquery"
                 ]
             }
         }

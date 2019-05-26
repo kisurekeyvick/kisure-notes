@@ -16,7 +16,7 @@ foo.bar = 1;
 foo.bas = 'kisure';
 
 /** 
- * 最初的断言语法如下所示：
+    最初的断言语法如下所示：
     let foo: any;
     let bar = <string>foo;    
 
