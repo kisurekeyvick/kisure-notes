@@ -14,12 +14,11 @@ const bad: FromIndex = { b: 1, c: 2, d: 3 };
  * 同时拥有 string 和 number 类型的索引签名
  */
 
-
  /** 
   * 设计模式：索引签名的嵌套
   * 尽量不要使用这种把字符串索引签名与有效变量混合使用。如果属性名称中有拼写错误，这个错误不会被捕获到
   */
- interface NestedCSS {
+interface NestedCSS {
     color?: string;
     nest?: {
       [selector: string]: NestedCSS;

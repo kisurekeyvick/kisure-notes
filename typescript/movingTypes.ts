@@ -106,7 +106,36 @@ const func_3:infoJson = {
     age: '25'
 };
 
+/** 
+ * keyof 用于获取interface/class/type
+ * typeof 用于通过变量，获取格式为：{
+ *                                  属性：类型
+ *                                } 约束
+ */
 
 /** 
  * 关于ts的内置黑科技：https://www.cnblogs.com/jiasm/p/9789962.html
+ * 关于ts的教程：https://m.w3cschool.cn/typescript/typescript-6mvc2z9c.html
+ */
+
+interface Personk {
+    name: string;
+    age: number;
+    location: string;
+}
+
+type Partial1<T> = {
+    [P in keyof T]?: T[P];
+};
+
+type PartialPerson = Partial1<Personk>;
+
+/** 
+ * 那么这一层转化，变成了：
+ 
+    type ** = {
+        name?: string;
+        age?: number;
+        location?: string;
+    }
  */
