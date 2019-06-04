@@ -11,7 +11,7 @@
  * 
  * Worker 线程一旦新建成功，就会始终运行，不会被主线程上的活动（比如用户点击按钮、提交表单）打断。这样有利于随时响应主线程的通信。
  * 但是，这也造成了 Worker 比较耗费资源，不应该过度使用，而且一旦使用完毕，就应该关闭。
- */
+ */ 
 
 /** 
  * Web Worker 有以下几个使用注意点
@@ -186,5 +186,64 @@
 
     上面代码中，先将嵌入网页的脚本代码，转成一个二进制对象，然后为这个二进制对象生成 URL，
     再让 Worker 加载这个 URL。这样就做到了，主线程和 Worker 的代码都在同一个网页上面。
+ */
+
+/**
+ * web worker专用线程和共享线程
+
+    由于专用线程和共享线程的构造方法都包含在 window 对象中，我们在使用两者之前可以对浏览器的支持性进行判断。
+
+    if (window.Worker) {
+        // ...
+    }
+
+    if (window.SharedWorker) {
+        // ...
+    }
+
+    (1)创建专用线程
+    专用线程由 Worker()方法创建，可以接收两个参数，第一个参数是必填的脚本的位置，第二个参数是可选的配置对象，
+    可以指定 type、credentials、name 三个属性。
+        var worker = new Worker('worker.js', { name: 'dedicatedWorker'})
+
+    (2)创建共享线程
+    共享线程使用 Shared Worker() 方法创建，同样支持两个参数，用法与 Worker() 一致
+        var sharedWorker = new SharedWorker('shared-worker.js')
+
+    (3)专用线程和共享线程之间的区别
+    Worker(专用线程)一般用于交换信息，而不是共享信息，而SharedWorker则用于共享信息。
+ */
+
+/**
+ * https://segmentfault.com/a/1190000014938305
+ * 
+ * 异步编程的局限性
+ * 
+ * 异步编程通过调度部分代码使之在事件循环中延迟执秆，这样就允许优先渲染程序界面，从而让程序运行流畅。
+ * AJAX 请求是一个很好的异步编程的使用场景 。
+ * 因为请求可能会花很长的时间，所以可以异步执行它们，然后在客户端等待数据返回的同时，运行其它代码。
+ * 
+    // 假设使用 jQuery
+    jQuery.ajax({
+        url: 'https://api.example.com/endpoint',
+        success: function(response) {
+                // 当数据返回时候的代码
+        }
+    });
+
+    然而，这里会产生一个问题－AJAX 请求是由浏览器网页 API 进行处理的，可以异步执行其它代码吗？
+    比如，假设成功回调的代码是 CPU 密集型的：
+    var result = performCPUIntensiveCalculation();
+
+    如果 performCPUIntensiveCalculation 不是一个 HTTP 请求而是一个会阻塞界面渲染的代码。
+    这样就没有办法释放事件循环和浏览器的 UI－浏览器会被冻结住且失去响应。
+
+    这意味着，异步函数只是是解决了一部分 JavaScript 的单线程限制。
+
+    Web Workers 是浏览器内置的线程所以可以被用来执行非阻塞事件循环的 JavaScript 代码。
+
+    Web Workers 允许你做诸如运行处理 CPU 计算密集型任务的耗时脚本而不会阻塞 UI 的事情。
+    事实上，所有这些操作都是并行执行的。Web Workers 是真正的多线程。
+    JavaScript 是一门没有定义线程模型的语言，Web Workers 并不是 JavaScript 的一部分，他们是可以通过 JavaScript 进行操作的浏览器功能之一。
  */
 
