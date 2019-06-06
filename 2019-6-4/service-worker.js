@@ -44,9 +44,9 @@
     //////////////////////// Service Worker大致的生命周期 /////////////////////////
     (1) js主线程调用：navigator.serviceWorker.register，开始下载service worker
     (2) 下载完成以后，创建worker线程，触发install事件
-    (3) service worker 一直处于激活状态，直到被销毁
-    (4) 尝试拉去最新的worker脚本
-    (5) 判断脚本是否需要更新，如果需要更新，那么安装最新的service worker,然后激活。如果不需要更新，那么直接完成，结束。
+    (3) service worker 需要进行激活，浏览器会尝试下载Service Worker脚本文件，下载成功后，
+        会与前一次已缓存的Service Worker脚本文件做对比，如果与前一次的Service Worker脚本文件不同，
+        那么会销毁旧的service worker，然后安装新的service worker，然后激活新的worker
  */
 
 // 案例
