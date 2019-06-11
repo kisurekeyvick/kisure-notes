@@ -89,3 +89,99 @@
     (3)理想情况下，对于某些高优先级的操作，应该是可以打断低优先级的操作执行的，
         比如用户输入时，页面的某个评论还在reconciliation，应该优先响应用户输入
  */
+
+/**
+ * https://zhuanlan.zhihu.com/p/44942360
+ * 
+ * (1) Fiber Node 及 Fiber Tree
+ *  Fiber Node是react 生成的 Virtual Dom 基础上增加的一层数据结构。
+ *  Fiber Node主要是为了将递归遍历转变成循环遍历，配合 requestIdleCallback API, 实现任务拆分、中断与恢复。
+ *  每一个 Fiber Node 节点与 Virtual Dom 一一对应，所有 Fiber Node 连接起来形成 Fiber tree。
+ * 
+ * (2) reconciliation 
+ *  当执行 setState() 或首次 render() 时，进入工作循环，循环体中处理的单元为 Fiber Node, 即是拆分任务的最小单位，
+ *  从根节点开始，自顶向下逐节点构造 workInProgress tree（构建中的新 Fiber Tree）。
+ 
+    function workLoop(isAsync) {
+        if (!isAsync) {
+            // Flush all expired work.
+            while (nextUnitOfWork !== null) {
+                nextUnitOfWork = performUnitOfWork(nextUnitOfWork);
+            }
+        } else {
+            // Flush asynchronous work until the deadline runs out of time.
+            while (nextUnitOfWork !== null && !shouldYield()) {
+                nextUnitOfWork = performUnitOfWork(nextUnitOfWork);
+            }
+
+            if (enableProfilerTimer) {
+                // If we didn't finish, pause the "actual" render timer.
+                // We'll restart it when we resume work.
+                pauseActualRenderTimerIfRunning();
+            }
+        }
+    }
+
+    (3) 每个工作处理单元做的事情，由 beginWork(), completeUnitOfWork() 两部分构成。
+    function performUnitOfWork(workInProgress) {
+        // 简化后逻辑
+        var next = void 0;
+        var current = workInProgress.alternate;
+
+        next = beginWork(current, workInProgress, nextRenderExpirationTime);
+
+        if (next === null) {
+            next = completeUnitOfWork(workInProgress);
+        }
+
+        ReactCurrentOwner.current = null;
+
+        return next;
+    }
+
+    beginWork() 主要做的事情是从顶向下生成所有的 Fiber Node，并标记 Diff, 不包括兄弟节点。
+    每个 Fiber Node 的处理过程根据组件类型略有差异
+
+        (3.1) 以ClassComponent 为例
+            1 - 如果当前节点不需要更新，直接把子节点clone过来，跳到5，要更新的话标记更新类型
+            2 - 更新当前节点状态（props, state, context等）
+            3 - 调用shouldComponentUpdate()
+            4 - 调用组件实例方法 render() 获得新的子节点，并为子节点创建 Fiber Node
+                （创建过程会尽量复用现有 Fiber Node，子节点增删也发生在这里）
+            5 - 如果没有产生 child fiber，进入下一阶段 completeUnitOfWork
+
+    completeUnitOfWork() 当没有子节点，开始遍历兄弟节点作为下一个处理单元，处理完兄弟节点开始向上回溯，
+    真到再次回去根节点为止，将收集向上回溯过程中的所有 diff，拿到 diff 后开始进入 commit 阶段。
+    构建 workInProgress tree 的过程就是 diff 的过程，通过 requestIdleCallback 来调度执行一组任务，
+    每完成一个任务后回来看看有没有插队的（更紧急的），把时间控制权交还给主线程，
+    直到下一次 requestIdleCallback 回调再继续构建workInProgress tree。
+
+    (4) Fiber 架构下，生命周期做了较大调整
+        推荐                            不推荐
+        componentDidMount               componentWillMount
+        getDerivedStateFromProps        componentWillReceiveProps
+        componentDidUpdate              componentWillUpdate
+
+        如果项目中依赖了这些不推荐的生命周期，升级过渡还需要做一些修改，如果继续使用，会给出警告提示，并在下个版本 17 中彻底移除。
+
+    (5) 为什么生命周期要做这么大的改动呢？
+        由于在 reconciler 阶段，在更新过程中，任务按照节点为单位拆分成了一个个小工作单元，在 render 前可能会中断或恢复，
+        导致在 render 前的这些生命周期在进行一次更新时存在多次执行的情况，可能得到与预期不一致的结果。
+
+        Fiber 给出的解决方案是增加了两个新的生命周期：
+        1 - static getDerivedStateFromProps
+        getDerivedStateFromProps: 是一个静态方法，主要取代 ComponentWillXXX 生命周期，解除此类生命周期带来的副作用。
+
+        2 - getSnapshotBeforeUpdate
+        会在 render 之后执行，而执行之时 DOM 元素还没有被更新，给了一个机会去获取 DOM 信息，计算得到一个 snapshot。
+
+    (6) Fiber 体系下的生命周期
+        Mounting:
+            getDerivedStateFromProps -> render -> componentDidMount
+
+        Updating:
+            getDerivedStateFromProps(如果props更新，那么会触发) -> shoundComponentUpdate -> render -> getSnapshotBeforeUpdate -> componentDidMount
+
+        Unmounting:
+            componentWillUnmount
+ */
