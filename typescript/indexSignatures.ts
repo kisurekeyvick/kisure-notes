@@ -50,7 +50,7 @@ const example: NestedCSS = {
 // 有时，你需要把属性合并至索引签名（虽然我们并不建议这么做，你应该使用上文中提到的嵌套索引签名的形式）,如下：
 type FieldState = {
     value: string;
-  };
+};
   
 type FromState = {
     isValid: boolean; // Error: 不符合索引签名
