@@ -16,7 +16,7 @@
 │   ├── html-node.js    动态/静态节点
 │   ├── good-web-page.js    一次完整的web请求和渲染过程
 │   ├── css-blocking-reason.js  CSS 与 JS 阻塞 DOM 解析和渲染的原理
-│
+│   ├── code-style.js       代码风格
 │
 ├── 2019-6-19
 │   ├── index.html  关于首屏渲染的动画
