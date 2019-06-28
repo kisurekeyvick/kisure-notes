@@ -72,6 +72,80 @@
 /**
  * 3. 格式化日期
  * 
+ * 如果需要创建自定义格式的时间，可以使用以下方法：
+ * (1) getHours：获取当地时间获取小时数（0-23）
+ * (2) getMinutes:获取本地时间获取分钟(0-59)
+ * (3) getSeconds：获取本地时间获取秒数（0-59）
+ * (4) getMilliseconds:获取本地时间获取毫秒(0-999)
+ */
+
+/**
+ * 4. 日期的比较
  * 
+ * (1) 比较日期的前后，可以直接使用>, <, >= 和 <= 时行比较。
+ * const earlier = new Date(2019, 0, 26)
+ * const later = new Date(2019, 0, 27)
+ * console.log(earlier < later) // true
+ * 
+ * (2) 比较两个日期是否一样，就比较麻烦，不能直接用 == 或 ===
+ * const a = new Date(2019, 0, 26)
+ * const b = new Date(2019, 0, 26)
+ * console.log(a === b) // false
+ * 
+ * 可以getTime获取它们的时间戳，用时间戳进行比较
+ * const isSameTime = (a, b) => {
+ *      return a.getTime() === b.getTime()
+ * }
+ * 
+ * 如果只想检查两个日期是否在同一天，可以比较他们的getFullYear，getMonth和getDate值
+ * const isSameDay = (a, b) => {
+    return a.getFullYear() === b.getFullYear() &&
+        a.getMonth() === b.getMonth() &&
+        a.getDate()=== b.getDate()
+    }
+
+    const a = new Date(2019, 0, 26, 10) // 26 Jan 2019, 10am
+    const b = new Date(2019, 0, 26, 12) // 26 Jan 2019, 12pm
+    console.log(isSameDay(a, b)) // true
+ */
+
+/** 
+ * 5. 从另一个日期获取日期
+ * 
+ * 有两种可能的情况，希望从另一个日期获得一个日期
+ * (1) 设置另一个日期特定的日期/时间值
+ * (2) 从另一个日期添加/减去增量
+ * 
+ * 设置另一个日期特定的日期/时间值
+ * 可以使用以下方法设置另一个日期的日期/时间
+ * (1) setFullYear: 设置年份
+ * (2) setMonth：设置月份
+ * (3) setDate：设置每月的某一天
+ * (4) setHours：设置时
+ * (5) setMinutes：设置分
+ * (6) setSeconds：设置秒
+ * (7) setMilliseconds：设置毫秒
+ * 
+ * 如果想将日期设置为每月15日，可以使用setDate(15)
+ * const d = new Date(2019, 0, 10)
+ * d.setDate(15)
+ * console.log(d) // 15 January 2019
+ * 
+ * 注意：上面的setter方法会改变原始日期对象。 
+ * 在实际中，我们不应该改变对象，应该在新的日期对象上执行这些操作。
+ * const d = new Date(2019, 0, 10)
+ * const newDate = new Date(d)
+ * newDate.setMonth(5)
+ * 
+ * console.log(d) // 10 January 2019
+ * console.log(newDate) // 10 June 2019
+ */
+
+/** 
+ * 6. 自动日期校正
+ * 
+ * 如果为Date提供一个超出其可接受范围的值，JS 将自动重新计算日期
+ * 如下所示，假设我们把日期定在2019年3月33日，日历上没有33日，JS 会自动将3月33日调整为4月2日。
+ * new Date(2019, 2, 33);
  */
 
