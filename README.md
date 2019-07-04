@@ -10,6 +10,10 @@
 
 # Common文件目录说明
 ```
+├── 2019-7-04
+│   ├── react-knowledge.js(上)      一些关于react的知识点(生命周期，fragment，错误边界，非/受控组件，纯函数，
+│   │                               命令/声明式编程，函数式编程，虚拟dom)
+│
 ├── 2019-7-02
 │   ├── js-engine.js    关于JS引擎的一些介绍
 │   ├── memory-manage.js    JavaScript如何工作:内存管理+如何处理4个常见的内存泄漏
