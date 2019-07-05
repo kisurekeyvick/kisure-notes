@@ -10,6 +10,11 @@
 
 # Common文件目录说明
 ```
+├── 2019-7-05
+│   ├── react-knowledge.js(下)       一些关于react的知识点(提高性能，重载时候保存数据)
+│   ├── js-skill.js                  8个关于js的小技巧(数组去重，Array.from，解构，有条件的动态属性)
+│   │
+│   
 ├── 2019-7-04
 │   ├── react-knowledge.js(上)      一些关于react的知识点(生命周期，fragment，错误边界，非/受控组件，纯函数，
 │   │                               命令/声明式编程，函数式编程，虚拟dom)
