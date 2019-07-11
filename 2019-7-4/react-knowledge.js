@@ -27,6 +27,8 @@
         const numberdouble = numbers[i] * 2;
         doubleWithImp.push(numberdouble)
     }
+
+    总结：所谓的声明式，你可以理解为调用相关的api，而命令式就是一步一步的通过最最基础的代码实现功能。
  */
 
 /** 

@@ -11,6 +11,8 @@
 # wechart文件目录说明
 ```
 ├── wechart
+│   ├── 2019-7-11 app.js            微信小程序 全局配置中的app.js 以及在page中获取app实例
+│   ├── 2019-7-11 we:if.js          微信小程序中的wx:if
 │   ├── 2019-7-11 component.js      微信小程序创建公共组件
 │   ├── 2019-7-11 pass-params.js    微信小程序，传参
 │   ├── 2019-7-11 background.js     微信小程序中设置背景图片
