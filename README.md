@@ -8,9 +8,11 @@
 │ 
 ```
 
-# wechart项目回顾
+# wechart文件目录说明
 ```
-├── 2019-7-11
+├── wechart
+│   ├── 2019-7-11 component.js      微信小程序创建公共组件
+│   ├── 2019-7-11 pass-params.js    微信小程序，传参
 │   ├── 2019-7-11 background.js     微信小程序中设置背景图片
 │   ├── 2019-7-11 iconfoot.js       关于微信小程序使用字体图标
 │   ├── 2019-7-11 list-rendering.js  微信列表渲染 wx:for相关
