@@ -8,6 +8,14 @@
 │ 
 ```
 
+# react文件目录说明
+```
+├── react
+│   ├── 2019-7-12
+│       ├── react-component-optimize.js     可能你的react函数组件从来没有优化过(函数组件React.memo，useCallback)
+│
+```
+
 # wechart文件目录说明
 ```
 ├── wechart
