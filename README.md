@@ -19,6 +19,10 @@
 # wechart文件目录说明
 ```
 ├── wechart
+│   ├── 2019-7-13 component-contact.js          组件之间的通讯与事件
+│   ├── 2019-7-13 component-data-observe.js     微信小程序组件数据监听
+│   ├── 2019-7-13 behaviors.js      小程序中的behaviors
+│   ├── 2019-7-13 page.js           微信小程序page页面其中的方法
 │   ├── 2019-7-11 app.js            微信小程序 全局配置中的app.js 以及在page中获取app实例
 │   ├── 2019-7-11 we-if.js          微信小程序中的wx:if
 │   ├── 2019-7-11 component.js      微信小程序创建公共组件
