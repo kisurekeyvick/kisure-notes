@@ -28,6 +28,8 @@
 # wechart文件目录说明
 ```
 ├── wechart
+│   ├── 2019-7-16 adapter.js                    微信小程序屏幕适配
+│   ├── 2019-7-16 wechart-optimize.js           小程序的优化（分包，加载优化，首屏，渲染，避免不当使用onPageScroll）
 │   ├── 2019-7-13 component-contact.js          组件之间的通讯与事件
 │   ├── 2019-7-13 component-data-observe.js     微信小程序组件数据监听
 │   ├── 2019-7-13 behaviors.js      小程序中的behaviors
@@ -44,6 +46,10 @@
 
 # Common文件目录说明
 ```
+├── 2019-7-16
+│   ├── ++[[]][+[]]+[+[]] = 10.js   为什么值为10？
+│   │
+│   
 ├── 2019-7-05
 │   ├── react-knowledge.js(下)       一些关于react的知识点(提高性能，重载时候保存数据)
 │   ├── js-skill.js                  8个关于js的小技巧(数组去重，Array.from，解构，有条件的动态属性)
