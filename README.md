@@ -25,22 +25,40 @@
 │
 ```
 
+# vue文件目录
+```
+├── vue
+│   ├── 2019-7-17
+│       ├── vue-inner-directive.vue       vue中的一些基础指令认识，v-on的一些事件修饰符（stop,prevent,self这一类的）, vue中唯一内置的双向绑定指令 v-model，
+│       ├── vue-class-style.vue           在vue中使用样式，使用class的方式和内联样式
+│       ├── vue-for-key.vue               关于vue的 v-for  和对应的key
+│
+```
+
 # wechart文件目录说明
 ```
 ├── wechart
-│   ├── 2019-7-16 adapter.js                    微信小程序屏幕适配
-│   ├── 2019-7-16 wechart-optimize.js           小程序的优化（分包，加载优化，首屏，渲染，避免不当使用onPageScroll）
-│   ├── 2019-7-13 component-contact.js          组件之间的通讯与事件
-│   ├── 2019-7-13 component-data-observe.js     微信小程序组件数据监听
-│   ├── 2019-7-13 behaviors.js      小程序中的behaviors
-│   ├── 2019-7-13 page.js           微信小程序page页面其中的方法
-│   ├── 2019-7-11 app.js            微信小程序 全局配置中的app.js 以及在page中获取app实例
-│   ├── 2019-7-11 we-if.js          微信小程序中的wx:if
-│   ├── 2019-7-11 component.js      微信小程序创建公共组件
-│   ├── 2019-7-11 pass-params.js    微信小程序，传参
-│   ├── 2019-7-11 background.js     微信小程序中设置背景图片
-│   ├── 2019-7-11 iconfoot.js       关于微信小程序使用字体图标
-│   ├── 2019-7-11 list-rendering.js  微信列表渲染 wx:for相关
+│   ├── 2019-7-16
+│       ├── adapter.js                    微信小程序屏幕适配
+│       ├── wechart-optimize.js           小程序的优化（分包，加载优化，首屏，渲染，避免不当使用onPageScroll）
+│
+│   ├── 2019-7-13
+│       ├── component-contact.js          组件之间的通讯与事件
+│       ├── component-data-observe.js     微信小程序组件数据监听
+│       ├── behaviors.js                  小程序中的behaviors
+│       ├── page.js                       微信小程序page页面其中的方法
+│
+│   ├── 2019-7-12
+│       ├── page-data-init.js             微信小程序page初始化data注意事项
+│
+│   ├── 2019-7-11
+│       ├── app.js            微信小程序 全局配置中的app.js 以及在page中获取app实例
+│       ├── we-if.js          微信小程序中的wx:if
+│       ├── component.js      微信小程序创建公共组件
+│       ├── pass-params.js    微信小程序，传参
+│       ├── background.js     微信小程序中设置背景图片
+│       ├── iconfoot.js       关于微信小程序使用字体图标
+│       ├── list-rendering.js  微信列表渲染 wx:for相关
 │    
 ```
 
