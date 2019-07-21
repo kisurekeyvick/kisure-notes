@@ -28,6 +28,13 @@
 # vue文件目录
 ```
 ├── vue
+│   ├── 2019-7-20
+│       ├── filter.vue                   vue中的过滤器
+│       ├── directive.vue                vue中的自定义指令
+│
+│   ├── 2019-7-19
+│       ├── vue-exp.vue                  一些在Vue项目中遇到的问题
+│
 │   ├── 2019-7-17
 │       ├── vue-inner-directive.vue       vue中的一些基础指令认识，v-on的一些事件修饰符（stop,prevent,self这一类的）, vue中唯一内置的双向绑定指令 v-model，
 │       ├── vue-class-style.vue           在vue中使用样式，使用class的方式和内联样式
