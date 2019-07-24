@@ -28,6 +28,9 @@
 # vue文件目录
 ```
 ├── vue
+│   ├── 2019-7-23
+│       ├── vue.mvvm.vue                vue中针对数组的监听，以及双向绑定
+│
 │   ├── 2019-7-20
 │       ├── filter.vue                   vue中的过滤器
 │       ├── directive.vue                vue中的自定义指令
