@@ -28,8 +28,16 @@
 # vue文件目录
 ```
 ├── vue
+│   ├── 2019-7-26
+│       ├── vue.$listener.$attrs.vue     vue中祖孙通讯使用$listener，属性传递使用$attrs
+│       ├── vue.$refs.vue                vue中的ref使用
+│       ├── vue.$set.vue                 vue中使用$set给对象新增属性
+│       
 │   ├── 2019-7-23
 │       ├── vue.mvvm.vue                vue中针对数组的监听，以及双向绑定
+│       ├── vue.$emit.vue               vue实例中使用$emit触发事件，$on监听事件
+│       ├── vue.$nextTick.vue           vue中通过v-if/show来控制显示元素，通过$nextTick获取相关元素信息
+│       ├── vue.slot.vue                vue中的slot
 │
 │   ├── 2019-7-20
 │       ├── filter.vue                   vue中的过滤器
