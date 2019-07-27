@@ -28,6 +28,11 @@
 # vue文件目录
 ```
 ├── vue
+│   ├── 2019-7-27
+│       ├── vue-v-pre.vue               vue中的指令，跳过这个元素和它的子元素的编译过程
+│       ├── vue-is.vue                  vue中is的作用和用法
+│       ├── vue.transition.vue          vue中的过渡动画
+│
 │   ├── 2019-7-26
 │       ├── vue.$listener.$attrs.vue     vue中祖孙通讯使用$listener，属性传递使用$attrs
 │       ├── vue.$refs.vue                vue中的ref使用
