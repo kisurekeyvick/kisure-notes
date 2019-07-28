@@ -28,6 +28,12 @@
 # vue文件目录
 ```
 ├── vue
+│   ├── 2019-7-28
+│       ├── vuex-core-concept.js        vuex的基础概念
+│       ├── vue-vuex-state.vue          vuex中的state
+│       ├── vue-vuex-getter.vue         vuex中的getter方法，获取计算后的state
+│       ├── vue-vuex-mutations.vue      vuex中的mutations,用于更新vuex 的 state，更改 Vuex 的 store 中的状态的唯一方法是提交 mutation
+│
 │   ├── 2019-7-27
 │       ├── vue-v-pre.vue               vue中的指令，跳过这个元素和它的子元素的编译过程
 │       ├── vue-is.vue                  vue中is的作用和用法
