@@ -29,6 +29,10 @@
 ```
 ├── vue
 │   ├── 2019-7-28
+│       ├── vue-vuex-action.vue         vuex中的action
+│       ├── vue-vuex-module.vue         vuex中的module
+│
+│   ├── 2019-7-28
 │       ├── vuex-core-concept.js        vuex的基础概念
 │       ├── vue-vuex-state.vue          vuex中的state
 │       ├── vue-vuex-getter.vue         vuex中的getter方法，获取计算后的state
