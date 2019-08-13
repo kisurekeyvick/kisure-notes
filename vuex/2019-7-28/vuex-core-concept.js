@@ -26,7 +26,7 @@
         },
         mutations: {
             increment (state) {
-            state.count++
+                state.count++
             }
         }
     })
