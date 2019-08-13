@@ -71,6 +71,9 @@
 # wechart文件目录说明
 ```
 ├── wechart
+│   ├── 2019-8-13
+│       ├── exp.doc                       微信小程序项目开发总结
+│
 │   ├── 2019-7-16
 │       ├── adapter.js                    微信小程序屏幕适配
 │       ├── wechart-optimize.js           小程序的优化（分包，加载优化，首屏，渲染，避免不当使用onPageScroll）
