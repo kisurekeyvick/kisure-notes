@@ -100,6 +100,10 @@
 
 # Common文件目录说明
 ```
+├── 2019-8-15
+│   ├── index.js                    关于spread/rest的特性，关于异步迭代（symbol.iterator）
+│   │
+│
 ├── 2019-7-31
 │   ├── js-features.js              3个实用有趣的JS特性
 │   ├── happiness.js                提升幸福感的几个js技巧

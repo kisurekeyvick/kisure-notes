@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .margin {
+            margin-bottom: 50px;
+        }
+
+        .demo1-box {
+            border: 2px dotted #ddd;
+            min-height: 105px;
+        }
+
+        .demo1-box div {
+            float: left;
+            background-color: aqua;
+            width: 100px;
+            height: 100px;
+            margin: 3px;
+        }
+
+        .demo1-box div:first-child {
+            margin-left: -50px;
+            margin-right: -50px;
+            margin-top: -50px;
+            margin-bottom: -50px;
+        }
+
+        .demo2-box {
+
+        }
+
+        .demo2-box div {
+            width: 200px;
+            height: 200px;
+            float: left;
+            background-color: aqua;
+            shape-outside: circle();
+        }
+
+        .demo3-box .outer {
+            background-color: aqua;
+            /* overflow: hidden; */
+        }
+
+        .demo3-box .inner {
+            margin-top: 30px;
+        }
+
+        .demo4-box .bg {
+
+        }
+
+        .demo4-box .text {
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="demo1 margin">
+        <h4>负边距的效果。注意左右负边距表现并不一致。左为负时，是左移，右为负时，是左拉。上下与左右类似</h4>
+
+        <div class="demo1-box">
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <div class="demo2 margin">
+        <h4>使用shape-outside</h4>
+
+        <div class="demo2-box">
+            <div></div>
+            nice fishnice fishnice fishnice fishnice fishnice fishnice fishnice fish
+            nice fishnice fishnice fishnice fishnice fishnice fishnice fishnice fish
+            nice fishnice fishnice fishnice fishnice fishnice fishnice fishnice fish
+            nice fishnice fishnice fishnice fishnice fishnice fishnice fishnice fish
+            nice fishnice fishnice fishnice fishnice fishnice fishnice fishnice fish
+            nice fishnice fishnice fishnice fishnice fishnice fishnice fishnice fish
+        </div>
+    </div>
+
+    <div class="demo3 margin">
+        <h4>BFC应用之阻止外边距合并</h4>
+
+        <div class="demo3-box">
+            nice fishnice fishnice fishnice fishnice fishnice fishnice fishnice fish
+            nice fishnice fishnice fishnice fishnice fishnice fishnice fishnice fish
+            <div class="outer">
+                <div class="inner">
+                    nice fishnice fishnice fishnice fishnice fishnice fishnice fishnice fish
+                    nice fishnice fishnice fishnice fishnice fishnice fishnice fishnice fish
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo4 margin">
+        <h4>BFC应用之消除浮动的影响</h4>
+
+        <div class="demo4-box">
+            <div class="bg"></div>
+            <div class="text">
+                nice fishnice fishnice fishnice fishnice fishnice fishnice fishnice fish
+                nice fishnice fishnice fishnice fishnice fishnice fishnice fishnice fish
+            </div>
+        </div>
+    </div>
+</body>
+</html>
