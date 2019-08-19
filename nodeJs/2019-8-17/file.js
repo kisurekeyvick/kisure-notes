@@ -95,10 +95,10 @@ const str = bin.toString('utf-8'); // => "hello"
  * 因此对.slice方法返回的Buffer的修改会作用于原Buffer，例如：
  */
 const bin_1 = new Buffer([ 0x68, 0x65, 0x6c, 0x6c, 0x6f ]);
-const sub_1 = bin.slice(2);
+const sub_1 = bin_1.slice(2);
 
 sub_1[0] = 0x65;
-console.log(bin); // => <Buffer 68 65 65 6c 6f>
+console.log(bin_1); // => <Buffer 68 65 65 6c 6f>
 
 /** 
  * 如果想要拷贝一份Buffer，得首先创建一个新的Buffer，并通过.copy方法把原Buffer中的数据复制过去。
@@ -157,6 +157,7 @@ rs.on('end', function () {
 });
 
 ws.on('drain', function() {
+    // drain 代表的意思是内存里面的东西用完了，于是内存空了
     rs.resume();
 });
 
