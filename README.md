@@ -1,38 +1,49 @@
 # 这个是KISURE的笔记，在以后的2-3年内会不断更新
 - 记录js底层实现原理，追求新技术的探索
 
+# 前端脚手架
+```
+├── vue-cli
+│   ├── 2019-8-27
+│       ├── cli.js                  关于一些前端脚手架的介绍，入门
+│       ├── cli-init.js             脚手架初始化
+│       ├── cli-params.js           命令行工具参数设计
+│       ├── cli-template.js         输入命令加载对应的模板
+│
+```
+
 # NodeJs文件目录说
 ```
 ├── nodeJs
-│   ├── 2109-8-26
+│   ├── 2019-8-26
 │       ├── progress.js             nodejs progress 进程
 │       ├── stream-readable.js      nodejs流：readable
 │       ├── stream-writable.js      nodejs流：writable
 │
-│   ├── 2109-8-25
+│   ├── 2019-8-25
 │       ├── __dirname-and-__filename.js     __dirname 和 ./ 的区别, __filename
 │       ├── event-and-util.js       nodejs中的event事件，util工具
 │       ├── fs.js                   nodejs中的文件系统
 │       ├── stream.js               nodejs中流的简单介绍
 │
-│   ├── 2109-8-21
+│   ├── 2019-8-21
 │       ├── fs-stream.js            nodejs文件系统简单介绍
 │ 
-│   ├── 2109-8-20
+│   ├── 2019-8-20
 │       ├── common.js               commonjs是js的规范，对commonjs的介绍
 │       ├── npm_fs.js               npm的介绍和fs文件系统的尝试
 │ 
-│   ├── 2109-8-19
+│   ├── 2019-8-19
 │       ├── http.js                 nodejs的http
 │
-│   ├── 2109-8-18              
+│   ├── 2019-8-18              
 │       ├── directory-traversal.js  遍历目录(递归算法, 遍历算法, 同步遍历, 异步遍历, 文本编码, 单字节编码)
 │       ├── network.js              网络操作（http模块， url模块）
 │
-│   ├── 2109-8-17
+│   ├── 2019-8-17
 │       ├── file.js                 nodejs文件系统
 │
-│   ├── 2109-8-16
+│   ├── 2019-8-16
 │       ├── base.js                 nodejs基础入门必备知识
 │       ├── organization&deployment.js      模块路径解析规则, package包, 工程目录
 │  
