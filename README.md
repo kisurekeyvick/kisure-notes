@@ -1,6 +1,54 @@
 # 这个是KISURE的笔记，在以后的2-3年内会不断更新
 - 记录js底层实现原理，追求新技术的探索
 
+# 前端脚手架
+```
+├── vue-cli
+│   ├── 2019-8-27
+│       ├── cli.js                  关于一些前端脚手架的介绍，入门
+│       ├── cli-init.js             脚手架初始化
+│       ├── cli-params.js           命令行工具参数设计
+│       ├── cli-template.js         输入命令加载对应的模板
+│
+```
+
+# NodeJs文件目录说
+```
+├── nodeJs
+│   ├── 2019-8-26
+│       ├── progress.js             nodejs progress 进程
+│       ├── stream-readable.js      nodejs流：readable
+│       ├── stream-writable.js      nodejs流：writable
+│
+│   ├── 2019-8-25
+│       ├── __dirname-and-__filename.js     __dirname 和 ./ 的区别, __filename
+│       ├── event-and-util.js       nodejs中的event事件，util工具
+│       ├── fs.js                   nodejs中的文件系统
+│       ├── stream.js               nodejs中流的简单介绍
+│
+│   ├── 2019-8-21
+│       ├── fs-stream.js            nodejs文件系统简单介绍
+│ 
+│   ├── 2019-8-20
+│       ├── common.js               commonjs是js的规范，对commonjs的介绍
+│       ├── npm_fs.js               npm的介绍和fs文件系统的尝试
+│ 
+│   ├── 2019-8-19
+│       ├── http.js                 nodejs的http
+│
+│   ├── 2019-8-18              
+│       ├── directory-traversal.js  遍历目录(递归算法, 遍历算法, 同步遍历, 异步遍历, 文本编码, 单字节编码)
+│       ├── network.js              网络操作（http模块， url模块）
+│
+│   ├── 2019-8-17
+│       ├── file.js                 nodejs文件系统
+│
+│   ├── 2019-8-16
+│       ├── base.js                 nodejs基础入门必备知识
+│       ├── organization&deployment.js      模块路径解析规则, package包, 工程目录
+│  
+```
+
 # H5文件目录说明
 ```
 ├── h5
@@ -8,13 +56,15 @@
 │ 
 ```
 
-# react文件目录说明
+# React文件目录说明
 ```
 ├── react
 │   ├── 2019-9-8
 │       ├── react-interface.tsx                 react typescript
 │       ├── react.forwardRef.tsx                react.createRef 和 react.forwardRef
 │       ├── react-hooks.tsx                     useEffect,useState,useMemo,useReducer,useContext
+│       
+│   ├── 2019-8-23                               react v16.9的一些更改
 │
 │   ├── 2019-7-15
 │       ├── react-fiber.js(下)                  浅谈 React Fiber 架构(二)
@@ -30,7 +80,7 @@
 │
 ```
 
-# vue文件目录
+# Vue文件目录
 ```
 ├── vue
 │   ├── 2019-7-28
@@ -73,7 +123,7 @@
 │
 ```
 
-# wechart文件目录说明
+# Wechart文件目录说明
 ```
 ├── wechart
 │   ├── 2019-8-13
@@ -105,6 +155,12 @@
 
 # Common文件目录说明
 ```
+├── 2019-8-23
+│   ├── debounce-and-throttle.js    节流和去抖动的实现和概念
+│   ├── judge-array.js              判断数组的方法，及这些方法间的区别和优劣
+│   ├── for.js                      for和forEach循环性能对比分析
+│   │
+│ 
 ├── 2019-8-15
 │   ├── index.js                    关于spread/rest的特性，关于异步迭代（symbol.iterator）
 │   │
