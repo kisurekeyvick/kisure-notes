@@ -1,0 +1,34 @@
+/** 
+ * 
+ */
+{
+    "compilerOptions": {    // 编译的选项
+        "outDir": "./",      // 会将当前编译后的代码存放到对应的文件中
+        //  "outDir": "./out"   如果指定输出为out文件夹，那么就会将编译后的代码存放到out文件夹中
+        "noEmitOnError": true,  // 代表的是，如果编译出错了，那么就不会编译出js文件
+    },
+    "include": {    // 编译的文件类型
+        "*.ts"     // 所有的.ts文件 
+    }
+}
+
+/** 
+    (1) files、include、exclude
+    "files"指定一个包含相对或绝对文件路径的列表。 "include"和"exclude"属性指定一个文件glob匹配模式列表。 支持的glob通配符有：
+    * 匹配0或多个字符（不包括目录分隔符）
+    ? 匹配一个任意字符（不包括目录分隔符）
+    "**\/" 递归匹配任意子目录
+
+    如果一个glob模式里的某部分只包含*或.*，那么仅有支持的文件扩展名类型被包含在内（比如默认.ts，.tsx，和.d.ts， 如果 allowJs设置能true还包含.js和.jsx）
+
+    -   如果"files"和"include"都没有被指定，编译器默认包含当前目录和子目录下所有的TypeScript文件（.ts, .d.ts 和 .tsx），
+        排除在"exclude"里指定的文件。JS文件（.js和.jsx）也被包含进来如果allowJs被设置成true。 
+        如果指定了 "files"或"include"，编译器会将它们结合一并包含进来。 
+        使用 "outDir"指定的目录下的文件永远会被编译器排除，除非你明确地使用"files"将其包含进来（这时就算用exclude指定也没用）。
+
+    -   使用"include"引入的文件可以使用"exclude"属性过滤。 然而，通过 "files"属性明确指定的文件却总是会被包含在内，不管"exclude"如何设置。
+
+    -   任何被"files"或"include"指定的文件所引用的文件也会被包含进来。 A.ts引用了B.ts，因此B.ts不能被排除，除非引用它的A.ts在"exclude"列表中。
+
+    
+*/
