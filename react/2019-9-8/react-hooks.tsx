@@ -200,3 +200,41 @@ const ChildMeMemo: React.FC<InnerChild> = props => {
         hello this is child useMemo
     </div>
 } 
+
+/**
+ * useRef
+ * 用法：const refContainer = React.useRef(初始值);
+ */
+function TextInputWithFocusButton() {
+    const inputEl = React.useRef(null);
+    const onButtonClick = () => {
+        // `current` points to the mounted text input element
+        inputEl.current.focus();
+    };
+    return (
+        <>
+          <input ref={inputEl} type="text" />
+          <button onClick={onButtonClick}>Focus the input</button>
+        </>
+    );
+}
+
+/** 
+ * useImperativeMethods
+ * 用法： useImperativeMethods(ref, createInstance, [inputs])
+ * useImperativeMethods自定义使用ref时公开给父组件的实例值。与往常一样，在大多数情况下应避免使用refs的命令式代码。 
+ * useImperativeMethods应与forwardRef一起使用
+ */
+function FancyInput(props, ref) {
+    const inputRef = React.useRef();
+    React.useImperativeMethods(ref, () => {
+        focus: () => {
+            inputRef.current.focus();
+        }
+    });
+    return <input ref={inputRef}/>
+}
+
+const FanInput = React.forwardRef(FancyInput);
+
+// 在此示例中，呈现<FanInput ref = {fancyInputRef} />的父组件将能够调用fancyInputRef.current.focus()。

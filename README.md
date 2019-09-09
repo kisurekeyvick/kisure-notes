@@ -155,6 +155,9 @@
 
 # Common文件目录说明
 ```
+├── 2019-9-9
+│   ├── cookie-path-domain.js       cookie中的path和domain,httponly,设置含键值对的cookie
+│
 ├── 2019-8-23
 │   ├── debounce-and-throttle.js    节流和去抖动的实现和概念
 │   ├── judge-array.js              判断数组的方法，及这些方法间的区别和优劣

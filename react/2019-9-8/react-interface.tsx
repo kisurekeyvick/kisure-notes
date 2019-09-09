@@ -121,7 +121,7 @@ export const Modal = React.forwardRef<MyModalMethods, MyModalProps>((props, ref)
     return <div className={`just demo ${visible ? 'visible': ''}`}>
         hello nice fish
     </div>;
-}
+})
 
 export const Test: React.FC<{}> = props => {
     const modal = React.useRef<MyModalMethods, null>(null);
