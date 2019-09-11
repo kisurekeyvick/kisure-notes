@@ -59,8 +59,11 @@
 # React文件目录说明
 ```
 ├── react
+│   ├── 2019-9-9
+│       ├── react-interface.tsx (下)            react typescript   类组件，高阶组件泛型
+│
 │   ├── 2019-9-8
-│       ├── react-interface.tsx                 react typescript
+│       ├── react-interface.tsx (上)            react typescript   函数组件
 │       ├── react.forwardRef.tsx                react.createRef 和 react.forwardRef
 │       ├── react-hooks.tsx                     useEffect,useState,useMemo,useReducer,useContext
 │       
@@ -218,5 +221,11 @@
 │
 ├── 2019-6-19
 │   ├── index.html  关于首屏渲染的动画
+│
+```
+# interview questions
+```
+├── interview questions
+│   ├── 2019-9-11.js    ES6的Set和Map数据结构、Promise、4种循环遍历的方法及之间的区别、结构赋值
 │
 ```

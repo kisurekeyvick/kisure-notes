@@ -123,7 +123,25 @@ export const Modal = React.forwardRef<MyModalMethods, MyModalProps>((props, ref)
     </div>;
 })
 
+/**
+ * 
+ * @param props 
+ */
 export const Test: React.FC<{}> = props => {
-    const modal = React.useRef<MyModalMethods, null>(null);
-    
+    // 引用
+  const modal = React.useRef<MyModalMethods | null>(null);
+  const confirm = React.useCallback(() => {
+    if (modal.current) {
+      modal.current.show();
+    }
+  }, []);
+
+  const handleOk = React.useCallback(() => {}, []);
+
+  return (
+    <div>
+      <button onClick={confirm}>show</button>
+      <Modal ref={modal} onOk={handleOk} />
+    </div>
+  );
 }

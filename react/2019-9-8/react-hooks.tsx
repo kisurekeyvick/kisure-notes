@@ -238,3 +238,17 @@ function FancyInput(props, ref) {
 const FanInput = React.forwardRef(FancyInput);
 
 // 在此示例中，呈现<FanInput ref = {fancyInputRef} />的父组件将能够调用fancyInputRef.current.focus()。
+
+/** 
+ * useCallback
+ * 
+ * useCallback将返回一个回忆的memoized版本，该版本仅在其中一个输入发生更改时才会更改。
+ * 当将回调传递给依赖于引用相等性的优化子组件以防止不必要的渲染（例如，shouldComponentUpdate）时，这非常有用。
+ * 
+ * useCallback(fn，inputs) 等效 useMemo(() => fn，inputs)
+ */
+const memoizedCallback = useCallback(() => {
+    run();  
+}, [a,b])
+
+
