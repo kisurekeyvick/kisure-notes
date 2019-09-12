@@ -191,7 +191,7 @@ console.log([...new Set(arr)]);     // [1, 2, 4, 5, 3]
         for，for/in与for/of会保留外部作用域的this
         对于forEach， 除非使用箭头函数，它的回调函数的 this 将会变化
 
-    结论：for/of是遍历数组最可靠的方式，它比for循环简洁，并且没有for/in和forEach()那么多奇怪的特例。
+        结论：for/of是遍历数组最可靠的方式，它比for循环简洁，并且没有for/in和forEach()那么多奇怪的特例。
             for/of的缺点是我们取索引值不方便，
 
         使用for/of获取数组索引，可以这样写：
@@ -251,4 +251,13 @@ console.log([...new Set(arr)]);     // [1, 2, 4, 5, 3]
         只有对象 person 上没有该属性或者属性值为 undefined 时该默认值才生效。
  */
 
-
+/** 
+    const person = {
+        name: 'jsPool',
+        country: 'China',
+        age: undefined,
+        sex: null
+    };
+    let {age = '12', sex = 'male'} = person;
+    // age: '12'    sex: null    
+ */

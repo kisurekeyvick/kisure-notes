@@ -158,6 +158,9 @@
 
 # Common文件目录说明
 ```
+├── 2019-9-12
+│   ├── async-await.js                    关于async/await的最佳实践
+│
 ├── 2019-9-9
 │   ├── cookie-path-domain.js       cookie中的path和domain,httponly,设置含键值对的cookie
 │
@@ -228,7 +231,11 @@
 ├── interview questions
 │
 ├── 2019-9-11
-│   ├── one.js    ES6的Set和Map数据结构、Promise、4种循环遍历的方法及之间的区别、结构赋值
-│   ├── two.js    
+│   ├── set-map-others.js       ES6的Set和Map数据结构、Promise、4种循环遍历的方法及之间的区别、结构赋值
+│   ├── http-tcp.js             关于http tcp的认知
+│
+├── 2019-9-11
+│   ├── link-tag.js             link标签中的ref属性：prefetch和preload,as属性，相关的作用
+│   ├── call-bind-apply.js      call,apply,bind的理解
 │
 ```
