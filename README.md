@@ -62,6 +62,9 @@
 │   ├── 2019-9-9
 │       ├── react-interface.tsx (下)            react typescript   类组件，高阶组件泛型
 │
+│   ├── 2019-9-9
+│       ├── react-interface.tsx (中)            react typescript   类组件，高阶组件泛型
+│
 │   ├── 2019-9-8
 │       ├── react-interface.tsx (上)            react typescript   函数组件
 │       ├── react.forwardRef.tsx                react.createRef 和 react.forwardRef
