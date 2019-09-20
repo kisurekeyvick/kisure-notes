@@ -81,6 +81,7 @@ function K(options = {}) {
         });
     }
 
+    initCompouted();
     new Compile(options.el, this);
 }
 
@@ -92,15 +93,19 @@ function observe(data) {
     return new Observe(data);
 }
 
-function Observe(data) {    
+function Observe(data) {
+    let dep = new Dep();
+
     for(const key in data) {    
         let value = data[key];
         // 继续进行观察
-        observe(val);
-        // 把data属性通过 Object.defineProperty的方式 定义属性
+        observe(value);
+        // 把data属性通过 Object.defineProperty 的方式 定义属性
         Object.defineProperty(data, key, {
             enumerable: true,
             get() {
+                // 这一步可以添加watcher
+                Dep.target && dep.addSub(Dep.target);
                 return value;
             },
             set(newVal) {
@@ -112,6 +117,8 @@ function Observe(data) {
                 
                 // 如果设置了不同的值，那么就对新设置的值进行数据劫持
                 observe(newVal);
+
+                dep.notify();   // 每一次更新值以后，都会更新dom操作
             }
         });
     }
@@ -123,7 +130,6 @@ function Observe(data) {
  * 
  * (2)深度响应：因为每次赋予一个新对象时会给这个新对象增加数据劫持
  */
-
 
 /** 
  * 模板的编译
@@ -178,10 +184,41 @@ function Compile(el, vm) {
                     val = val[key]; 
                 });
 
+                // 如果数据发生了变化，那么就添加监听
+                new Watcher(vm, RegExp.$1, function(newVal) {
+                    node.textContent = text.replace(/\{\{(.*)\}\}/, newVal);
+                });
+
                 node.textContent = text.replace(/\{\{(.*)\}\}/, val);
             }
+
+            /** v-model 双向数据的绑定 */
+            if (node.nodeType === 1) {
+                /** node.nodeType为1，代表的是元素节点 */
+                let nodeAttrs = node.attributes;
+                Array.from(nodeAttrs).forEach((attr) => {
+                    let name = attr.name;   // type='text'
+                    let exp = attr.value;   // v-modal='b'
+                    
+                    if (name.indexOf('v-modal') === 0) {
+                        // 也就是v-modal
+                        node.value = vm[exp];
+                    }
+
+                    new Watcher(vm, exp, function(newVal) {
+                        // 当watch触发时，会自动将内容放到输入框内
+                        node.value = newVal;
+                    });
+
+                    node.addEventListener('input', (e) => {
+                        let newVal = e.target.value;
+                        // 当我们使用vm[exp]的时候，就会触发observe中的set方法，于是就会执行observe中的notify方法
+                        vm[exp] = newVal;
+                    });
+                });
+            }
     
-            if (node.childNodes ) {
+            if (node.childNodes) {
                 replace(node);
             }
         });
@@ -191,4 +228,65 @@ function Compile(el, vm) {
 
     // 最后，我们把文档碎片重新挂载到vm.$el上去
     vm.$el.appendChild(fragment);
+}
+
+/** 
+ * 发布订阅模式
+ * 
+ */
+// 发布订阅模式，都需要有一个update属性
+function Dep() {
+    this.subs = [];
+}
+
+// 添加订阅
+Dep.prototype.addSub = function(sub) {
+    this.subs.push(sub);
+}
+
+// 通知
+Dep.prototype.notify = function() {
+    this.subs.forEach(sub => sub.update());
+}
+
+function Watcher(vm, exp, fn) {
+    this.fn = fn;
+    this.vm = vm;
+    this.exp = exp;
+
+    // 然后我们需要将watcher添加到Dep中
+    // 我们现在Dep构造函数上，定一个target属性
+    Dep.target = this;
+    let val = vm;
+    let arr = exp.split('.');
+    arr.forEach(function(key) { // 相当于this.a.a
+        val = val[key];
+    });
+    Dep.target = null;
+}
+
+Watcher.prototype.update = function() {
+    let val = this.vm;
+    let arr = this.exp.split('.');
+    arr.forEach(function(key) { // 相当于this.a.a
+        val = val[key];
+    });
+    this.fn(val);
+}
+
+/** 
+ * computed
+ * computed可以被缓存，它其实是把数据挂在到vm上
+ */
+function initCompouted() {
+    let vm = this;
+    let computed = this.$options.computed;
+    Object.keys(computed).forEach(item => {
+        Object.defineProperty(vm, key, {
+            get: typeof computed[key] === 'function' ? computed[key] : computed[key].get,
+            set() {
+
+            }
+        });
+    });
 }
