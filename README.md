@@ -161,8 +161,11 @@
 
 # Common文件目录说明
 ```
+├── 2019-9-18
+│   ├── useful-web-api.js           一些不常见，但是很有用的web api
+│
 ├── 2019-9-12
-│   ├── async-await.js                    关于async/await的最佳实践
+│   ├── async-await.js              关于async/await的最佳实践
 │
 ├── 2019-9-9
 │   ├── cookie-path-domain.js       cookie中的path和domain,httponly,设置含键值对的cookie
@@ -232,6 +235,9 @@
 # interview questions
 ```
 ├── interview questions
+│
+├── 2019-9-17
+│   ├── vue.mvvm.js             关于vue中的mvvm（包括了发布订阅，数据劫持，数据代理，模板编译，observe，computed）
 │
 ├── 2019-9-11
 │   ├── set-map-others.js       ES6的Set和Map数据结构、Promise、4种循环遍历的方法及之间的区别、结构赋值
