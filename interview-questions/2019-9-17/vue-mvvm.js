@@ -284,9 +284,41 @@ function initCompouted() {
     Object.keys(computed).forEach(item => {
         Object.defineProperty(vm, key, {
             get: typeof computed[key] === 'function' ? computed[key] : computed[key].get,
-            set() {
-
-            }
+            set() { }
         });
     });
 }
+
+/** 
+ * mvvm的概述
+ * 
+ * vue中的mvvm，使用了数据劫持，数据代理，发布订阅者模式，模板编译。
+ * 
+ * - 数据劫持，使用Object.defineProperty(对象,属性, {
+ *      enumberable: true,
+ *      configurable: true,
+ *      get() {},
+ *      set() {}
+ * }),我们会定义一个observe的方法，这个方法传入一个参数，最开始会判断是否为对象，如果是对象，那么return new Observe();
+ * 而Observe这个构造函数中，会有一个Object.defineProperty属性，用于针对对象的属性做出拦截（用到了get和set）
+ * 
+ * - 当我们进行完数据劫持以后，我们还会进行数据的代理，用的也是Object.defineproperty。目的就将对象的属性挂载到this上面，这样我们就
+ * 可以直接通过this.的方式进行属性的访问
+ * 
+ * - 发布订阅者模式
+ * 我们使用Dep和Watch两个构造函数，Dep构造函数用于存储观察者，并且有一个notify的方法，它会执行观察者的update方法
+ * Dep还有一个add的方法用于添加观察者。
+ * Watch构造函数中接收3个参数：vm(this),属性，以及方法。而这个方法会接收一个参数，用于后面的替换节点的文本内容。
+ * 我们在构造watch的时候，会设置Dep函数一个target属性，这个属性用于存储this，这一步会在Observe中使用，在Observe中会使用
+ * new Dep()进行构造，然后在get方法中使用：Dep.target && dep.addSub(Dep.target); 这一步的触发，是因为watch中，我们在
+ * 设置Dep.target属性的值为this时候，还进行了传进来的属性的值访问。于是就会触发Observe中的get。
+ * 而watch中的update方法，也是对属性的访问和赋值。最后会执行this.fn(val)，这个val就是最终的访问到的值。
+ * 
+ * - 模板编译
+ * compile构造函数存在2个参数，一个是el代表的是选择器，第二个参数是当前的实例。
+ * 然后会创建文档碎片，创建文档碎片是为了节省内存的开支。然后compile中会实现一个replace方法，它的作用就是字面意思替换内容。
+ * replace接收文档碎片。我们通过Array.from的方式循环遍历存储在文档碎片中的节点。其中我们会判断这个节点是否为文本，或者为输入框
+ * 如果是文本，我们会在其中new Watch，传入：参数1（this），参数2（正则匹配到的属性），最后，传入一个function，这个function接收一个新的值
+ * 这个方法的目的就是设置文本的属性 textContent 的值为接收到的新值
+ * 如果是输入框，如果存在v-model，那么就会设置节点的value值。同时也会调用new Watcher()进行监听。
+ */
