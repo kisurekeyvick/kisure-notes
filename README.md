@@ -234,7 +234,6 @@
 ```
 # interview questions
 ```
-├── interview questions
 ├──2019-9-23
 │   ├── list.js                 数据结构中关于链表的一些理解
 │   ├── js-number-type-reference-type.js    js中的值类型和引用类型
