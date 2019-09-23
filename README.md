@@ -237,6 +237,8 @@
 ├── interview questions
 ├──2019-9-23
 │   ├── list.js                 数据结构中关于链表的一些理解
+│   ├── js-number-type-reference-type.js    js中的值类型和引用类型
+│   ├── sort.js                 排序算法介绍
 │
 ├──2019-9-22
 │   ├── http.js                 http请求头，user-agent的了解
