@@ -235,6 +235,11 @@
 # interview questions
 ```
 ├── interview questions
+├──2019-9-23
+│   ├── list.js                 数据结构中关于链表的一些理解
+│
+├──2019-9-22
+│   ├── http.js                 http请求头，user-agent的了解
 │
 ├── 2019-9-17
 │   ├── vue.mvvm.js             关于vue中的mvvm（包括了发布订阅，数据劫持，数据代理，模板编译，observe，computed）
