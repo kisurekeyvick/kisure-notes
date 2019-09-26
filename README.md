@@ -234,12 +234,21 @@
 ```
 # interview questions
 ```
-├──2019-9-23
+├── 2019-9-25
+│   ├── browser-principles.js       浏览器的常识：
+│                                   (1)浏览器内核 (2)浏览器的组成部分 (3)浏览器是如何渲染UI的 (4)浏览器是如何解析css
+│                                   (5)Dom Tree是如何构建的 (6)浏览器的重绘和排序 (7)如何触发重绘和排序 (8)如何避免重绘和排序
+│                                   (9)前端如何实现实时通讯 (10)浏览器的同源策略 (11)如何实现跨域    
+│
+├── 2019-9-24
+│   ├── requestanimationframe.js    关于requestanimationframe的了解
+│
+├── 2019-9-23
 │   ├── list.js                 数据结构中关于链表的一些理解
 │   ├── js-number-type-reference-type.js    js中的值类型和引用类型
 │   ├── sort.js                 排序算法介绍
 │
-├──2019-9-22
+├── 2019-9-22
 │   ├── http.js                 http请求头，user-agent的了解
 │
 ├── 2019-9-17
