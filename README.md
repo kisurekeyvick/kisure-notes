@@ -161,6 +161,9 @@
 
 # Common文件目录说明
 ```
+├── 2019-9-30
+│   ├── js-feature.js               几个js常用的技巧和鲜为人知的特性
+│
 ├── 2019-9-18
 │   ├── useful-web-api.js           一些不常见，但是很有用的web api
 │
@@ -234,6 +237,10 @@
 ```
 # interview questions
 ```
+├── 2019-9-29
+│   ├── knowledge.js                web中的知识点：css鼠标禁用,nth-child,CDN是什么,如何提高首频加载速度,link和@import的区别,css盒子模型,position相关的知识点,css的优化,优雅降级和渐进增强,如何修改chrome记住密码后自动填充表单的黄色背景,new一个对象的过程,Ajax解决浏览器缓存的问题,判断当前脚本运行在浏览器还是node环境中,关于script标签中的async和defer属性，一个页面输入URL发生了什么
+│   ├── web-optimize.js             前端性能的优化（目前只是提到那些点，需要再写的详细些）
+│
 ├── 2019-9-27
 │   ├── throttle-debounce.js        节流（throttle）与防抖（debounce）
 │  
