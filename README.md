@@ -234,6 +234,9 @@
 ```
 # interview questions
 ```
+├── 2019-9-27
+│   ├── throttle-debounce.js        节流（throttle）与防抖（debounce）
+│  
 ├── 2019-9-25
 │   ├── browser-principles.js       浏览器的常识：
 │                                   (1)浏览器内核 (2)浏览器的组成部分 (3)浏览器是如何渲染UI的 (4)浏览器是如何解析css
