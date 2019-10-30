@@ -237,6 +237,9 @@
 ```
 # interview questions
 ```
+├── 2019-10-21
+│   ├── questions.js                基础知识点（有面试题，）
+│
 ├── 2019-9-29
 │   ├── knowledge.js                web中的知识点：css鼠标禁用,nth-child,CDN是什么,如何提高首频加载速度,link和@import的区别,css盒子模型,position相关的知识点,css的优化,优雅降级和渐进增强,如何修改chrome记住密码后自动填充表单的黄色背景,new一个对象的过程,Ajax解决浏览器缓存的问题,判断当前脚本运行在浏览器还是node环境中,关于script标签中的async和defer属性，一个页面输入URL发生了什么
 │   ├── web-optimize.js             前端性能的优化（目前只是提到那些点，需要再写的详细些）

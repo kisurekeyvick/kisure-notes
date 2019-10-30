@@ -114,7 +114,6 @@ typeof console.log // 'function'
  * 因此采用typeof判断对象数据类型是不合适的，采用instanceof会更好，
  * instanceof的原理是基于原型链的查询，只要处于原型链中，判断永远为true
  */
-
 const Person = function() {}
 const p1 = new Person()
 p1 instanceof Person // true
@@ -444,4 +443,396 @@ document.addEventListener('click', function(e) {
  * 
  * - 如果Set-Cookie字段没有指定Expires或Max-Age属性，那么这个 Cookie 就是 Session Cookie，即它只在本次对话存在，
  *      一旦用户关闭浏览器，浏览器就不会再保留这个 Cookie
+ */
+
+/**
+ * (28) 同源指的是什么？
+ * 
+ * - 协议相同
+ * - 域名相同
+ * - 端口相同
+ */
+
+/** 
+ * (29) 哪些行为受到同源策略的限制？
+ * 
+ * - 无法读取非同源网页的 Cookie、LocalStorage 和 IndexedDB。
+ * - 无法接触非同源网页的 DOM。
+ * - 无法向非同源地址发送 AJAX 请求（可以发送，但浏览器会拒绝接受响应）
+ */
+
+ /** 
+  * (30) HTML5如何实现窗口间数据通信，请简要介绍一下？
+  * 
+  * postMessage是html5引入的API,postMessage()方法允许来自不同源的脚本采用异步方式进行有效的通信,
+  * 可以实现跨文本文档,多窗口,跨域消息传递.多用于窗口间数据通信,这也使它成为跨域通信的一种有效的解决方案。
+  * 
+  * - postMessage跨域通信的案例
+        <!DOCTYPE html>
+        <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <title>Document</title>
+            </head>
+            <body>
+                <iframe src="http://127.0.0.1:9090/b.html" name="postIframe" onload="messageLoad()"></iframe>
+            <script>
+                function messageLoad(){
+                    var url = "http://127.0.0.1:9090";
+                    window.postIframe.postMessage("给我tsort的信息",url); //发送数据
+                }
+
+                window.onmessage = function(e){
+                    e = e || event;
+                    console.log(e.data); //接收b返回的数据，在控制台有两次输出
+                }
+            </script>
+            </body>
+        </html>
+  * 
+  * 
+  * - 子窗体接收信息并处理
+  * 
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Document</title>
+        </head>
+        <body>
+        <script>
+            window.onmessage = function(e){
+                e = e || event;
+                alert(e.data); //立即弹出a发送过来的数据
+                e.source.postMessage("好的，请稍等三秒！",e.origin); //立即回复a
+
+                var postData = {name:"tsrot",age:24};
+                var strData = JSON.stringify(postData); //json对象转化为字符串
+                setTimeout(function(){
+                    e.source.postMessage(strData,e.origin);
+                },3000); //3秒后向a发送数据
+            }
+        </script>
+        </body>
+    </html>
+  */
+
+/** 
+ * (31) CORS里的简单请求和非简单请求的区别是什么？
+ * 
+ * 只要同时满足以下两大条件，就属于简单请求。
+ * - 请求方法是以下三种方法之一：HEAD、GET、POST
+ * - HTTP 的头信息不超出以下几种字段：
+ *      Accept
+ *      Accept-Language
+ *      Content-Language
+ *      Last-Event-ID
+ *      Content-Type：只限于三个值application/x-www-form-urlencoded、multipart/form-data、text/plain
+ */
+
+/** 
+ * (32) 浏览器发现这次跨域 AJAX 请求是简单请求，就自动在头信息之中添加哪个字段，表示什么意思？
+ * 
+ * 添加一个Origin字段。说明本次请求来自哪个域（协议 + 域名 + 端口）
+ */
+
+/** 
+ * (33) 如果origin指定的地址，不在服务器的许可范围内，浏览器会怎样，
+ *      那在服务器许可的范围，响应头会多出哪几个字段？
+ * 
+ * 如果Origin指定的源，不在许可范围内，服务器会返回一个正常的 HTTP 回应。
+ * 浏览器发现，这个回应的头信息没有包含Access-Control-Allow-Origin字段（详见下文），就知道出错了，
+ * 从而抛出一个错误，被XMLHttpRequest的onerror回调函数捕获。
+ * 
+ * 这种错误无法通过状态码识别，因为 HTTP 回应的状态码有可能是200。
+ * 
+ * 如果Origin指定的域名在许可范围内，服务器返回的响应，会多出几个头信息字段:
+    * - Access-Control-Allow-Origin: http://api.bob.com
+        Access-Control-Allow-Credentials: true
+        Access-Control-Expose-Headers: FooBar
+        Content-Type: text/html; charset=utf-8
+ */
+
+/** 
+ * (34) Access-Control-Allow-Credentials: true表示什么意思？
+ * 
+ * CORS 请求默认不包含 Cookie 信息（以及 HTTP 认证信息等），这是为了降低 CSRF 攻击的风险。
+ * 但是某些场合，服务器可能需要拿到 Cookie，这时需要服务器显式指定Access-Control-Allow-Credentials字段，告诉浏览器可以发送 Cookie
+ */
+
+/** 
+ * (35) 非简单请求中的预检请求是什么，预检请求有哪些不同于普通请求的请求头？
+ * 
+ * 非简单请求的 CORS 请求，会在正式通信之前，增加一次 HTTP 查询请求，称为预检请求（preflight）。
+ * 浏览器先询问服务器，当前网页所在的域名是否在服务器的许可名单之中，以及可以使用哪些 HTTP 方法和头信息字段。
+ * 
+    var url = 'http://api.alice.com/cors';
+    var xhr = new XMLHttpRequest();
+    xhr.open('PUT', url, true);
+    xhr.setRequestHeader('X-Custom-Header', 'value');
+    xhr.send();
+ */
+
+/**
+ * (36) history.pushState()是什么意思，它会跳转网页吗？
+ * 
+ * History.pushState()方法用于在历史中添加一条记录。
+ * window.history.pushState(state, title, url)
+ * 
+ * 该方法接受三个参数，依次为：
+ *      - state: 一个与添加的记录相关联的状态对象，主要用于popstate事件。该事件触发时，该对象会传入回调函数。
+ *               也就是说，浏览器会将这个对象序列化以后保留在本地，重新载入这个页面的时候，可以拿到这个对象。
+ *               如果不需要这个对象，此处可以填null。
+ *      - title: 新页面的标题。但是，现在所有浏览器都忽视这个参数，所以这里可以填空字符串。
+ *      - url：  新的网址，必须与当前页面处在同一个域。
+ * 
+ * 此API不会跳转网页。
+ */
+
+/** 
+ * (37) history.pushState()之后，用户点击浏览器的倒退按钮，会触发什么事件？
+ * 
+    window.addEventListener('popstate', function(event) {
+        console.log('location: ' + document.location);
+        console.log('state: ' + JSON.stringify(event.state));
+    });
+ */
+
+// URL对象相关问题?
+
+/** 
+ * (38) URL的编码和解码中，URL只能包含两类合法的字符，是那两类？
+ * 
+ * URL 元字符：分号（;），逗号（,），斜杠（/），问号（?），冒号（:），at（@），&，等号（=），加号（+），美元符号（$），井号（#）
+ * 
+ * 语义字符：a-z，A-Z，0-9，连词号（-），下划线（_），点（.），感叹号（!），波浪线（~），星号（*），单引号（'），圆括号（()）
+ * 
+ * 除了以上字符，其他字符出现在 URL 之中都必须转义，规则是根据操作系统的默认编码，
+ * 将每个字节转为百分号（%）加上两个大写的十六进制字母。
+ */
+
+/** 
+ * (39) URL提供了哪些URL的编码/解码方法？
+ * 
+ * JavaScript 提供四个 URL 的编码/解码方法。
+ * 
+ * - encodeURI
+ *      encodeURI()方法用于转码整个 URL。它的参数是一个字符串，代表整个 URL。它会将元字符和语义字符之外的字符，都进行转义。
+ *      encodeURI('http://www.example.com/q=春节')
+ *      // "http://www.example.com/q=%E6%98%A5%E8%8A%82"
+ * 
+ * - encodeURIComponent
+ *      encodeURIComponent()方法用于转码 URL 的组成部分，会转码除了语义字符之外的所有字符，即元字符也会被转码。
+ *      所以，它不能用于转码整个 URL。它接受一个参数，就是 URL 的片段。
+ *      
+ *      encodeURIComponent('春节')      // "%E6%98%A5%E8%8A%82"
+ *      encodeURIComponent('http://www.example.com/q=春节')
+ *      // "http%3A%2F%2Fwww.example.com%2Fq%3D%E6%98%A5%E8%8A%82"
+ * 
+ * - decodeURI 和 decodeURIComponent 是encodeURI、encodeURIComponent的逆运算
+ */
+
+/** 
+ * (40) URL对象的实例有哪些常用属性和方法？
+ * 
+ * var url = new URL('http://www.example.com:4097/path/a.html?x=111#part1');
+ * 
+ * url.href         // "http://user:passwd@www.example.com:4097/path/a.html?x=111#part1"
+ * url.pathname     // "/path/a.html"
+ * url.search       // "?x=111"
+ * 
+ * 常用的静态方法有:
+ * - URL.createObjectURL()
+ *      我自己经常会用这个API做本地图片预览。如下案例:
+        <body>
+            <div id="display" />
+            <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+            <script>
+                var div = document.getElementById('display');
+
+                function handleFiles(files) {
+                    for (var i = 0; i < files.length; i++) {
+                        var img = document.createElement('img');
+                        console.log(window.URL.createObjectURL(files[i]))
+                        img.src = window.URL.createObjectURL(files[i]);
+                        div.appendChild(img);
+                    }
+                }
+            </script>
+        </body>     
+ * 
+ * - URL.revokeObjectURL()
+ *      URL.revokeObjectURL方法用来释放URL.createObjectURL方法生成的 URL 实例。
+ *      它的参数就是URL.createObjectURL方法返回的 URL 字符串。
+ * 
+        var div = document.getElementById('display');
+
+        function handleFiles(files) {
+            for (var i = 0; i < files.length; i++) {
+                var img = document.createElement('img');
+                img.src = window.URL.createObjectURL(files[i]);
+                div.appendChild(img);
+                img.onload = function() {
+                    window.URL.revokeObjectURL(this.src);
+                }
+            }
+        }
+ */
+
+/** 
+ * (41) Blob对象的实例如何保存JSON？
+ * 
+ * var obj = { hello: 'world' };
+ * var blob = new Blob([ JSON.stringify(obj) ], {type : 'application/json'});
+ */
+
+/** 
+ * (42) File 对象是什么？
+ * 
+ * File对象代表一个文件，用来读写文件信息。
+ * 它继承了 Blob对象，或者说是一种特殊的 Blob对象，所有可以使用 Blob 对象的场合都可以使用它。
+ * 
+ * // <input id="fileItem" type="file">
+ * var file = document.getElementById('fileItem').files[0];
+ * file instanceof File // true
+ */
+
+/** 
+ * (43) FileReader 对象是什么？
+ * 
+ * FileReader对象用于读取File对象或Blob对象所包含的文件内容。
+ * 浏览器原生提供一个FileReader构造函数，用来生成 FileReader 实例。
+ * 
+ * var reader = new FileReader();
+ * 
+ * 常用的FileReader 有以下的实例属性：
+ *      - FileReader.result
+ *          读取完成后的文件内容，有可能是字符串，也可能是一个 ArrayBuffer 实例。
+ * 
+ *      - FileReader.onload
+ *          load事件（读取操作完成）的监听函数，通常在这个函数里面使用result属性，拿到文件内容。
+ * 
+ *      - FileReader.readAsDataURL()
+ *          读取完成后，result属性将返回一个 Data URL 格式（Base64 编码）的字符串，代表文件内容。
+ *          对于图片文件，这个字符串可以用于<img>元素的src属性。
+ *          注意，这个字符串不能直接进行 Base64 解码，必须把前缀"data:*/*;base64",从字符串里删除以后，再进行解码。
+ *
+ *      - FileReader.readAsText()
+ *          读取完成后，result属性将返回文件内容的文本字符串。
+ *          该方法的第一个参数是代表文件的 Blob 实例，第二个参数是可选的，表示文本编码，默认为 UTF-8。
+ */
+
+/** 
+ * (44) 下面是一个FileReader例子
+ */
+/* HTML 代码如下
+  <input type="file" onchange="previewFile()">
+  <img src="" height="200">
+*/
+function previewFile() {
+    const preview = document.querySelector('img');
+    const file    = document.querySelector('input[type=file]').files[0];
+    const reader  = new FileReader();
+
+    reader.addEventListener('load', () => {
+        preview.src = reader.result;
+    }, false);
+    // false 时候，事件句柄在冒泡阶段执行
+    // true 时候，事件句柄在捕获阶段执行522222222222222222222222222222222222222222222222222222222222222222222222222
+
+    file && reader.readAsDataURL(file);
+}
+
+/** 
+ * (45) FormData 对象?
+ * 
+ * Blob构造函数接受两个参数。
+ * 第一个参数是数组，成员是字符串或二进制对象，表示新生成的Blob实例对象的内容；
+ * 第二个参数是可选的，是一个配置对象，目前只有一个属性type，它的值是一个字符串，表示数据的MIME 类型，默认是空字符串。
+ * 
+ * - FormData 对象的实例，有哪些常用的方法？
+ *      FormData.append(key, value)：
+ *          添加一个键值对。如果键名重复，则会生成两个相同键名的键值对。
+ *          如果第二个参数是文件，还可以使用第三个参数，表示文件名。
+ *      FormData.set(key, value)：
+ *          设置指定键名的键值，参数为键名。如果键名不存在，会添加这个键值对，否则会更新指定键名的键值。
+ *          如果第二个参数是文件，还可以使用第三个参数，表示文件名。
+ *      FormData.delete(key)：
+ *          删除一个键值对，参数为键名。
+ *      FormData.get(key)：
+ *          获取指定键名对应的键值，参数为键名。如果有多个同名的键值对，则返回第一个键值对的键值。
+ *      FormData.getAll(key)：
+ *          返回一个数组，表示指定键名对应的所有键值。如果有多个同名的键值对，数组会包含所有的键值。
+ */
+var formData = new FormData();
+// 设置某个控件的值
+formData.set('username', '张三');
+formData.get('username') // "张三"
+formData.set('username', '张三');
+formData.append('username', '李四');
+formData.get('username') // "张三"
+formData.getAll('username') // ["张三", "李四"]
+
+formData.append('userpic[]', myFileInput.files[0], 'user1.jpg');
+formData.append('userpic[]', myFileInput.files[1], 'user2.jpg');
+
+/** 
+ * (46) enctype 属性是什么，有哪些值？
+ * 
+ * 表单能够用四种编码，向服务器发送数据。编码格式由表单的enctype属性决定。
+ * 
+ * - GET 方法
+ *      如果表单使用GET方法发送数据，enctype属性无效。
+ * 
+ *      <form action="register.php" method="get" onsubmit="AJAXSubmit(this); return false;">
+ *      </form>
+ * 
+ *      数据将以 URL 的查询字符串发出。
+ *      例如：?foo=bar&baz=The%20first%20line.%0AThe%20second%20line.
+ * 
+ * - application/x-www-form-urlencoded
+ *      如果表单用POST方法发送数据，并省略enctype属性，那么数据以application/x-www-form-urlencoded格式发送（因为这是默认值）。
+ * 
+ *      <form action="register.php" method="get" onsubmit="AJAXSubmit(this); return false;">
+ *      </form>
+ * 
+ *      发送的 HTTP 请求如下：
+ *          Content-Type: application/x-www-form-urlencoded
+ *          foo=bar&baz=The+first+line.%0D%0AThe+second+line.%0D%0A
+ * 
+ * - text/plain
+ *      如果表单使用POST方法发送数据，enctype属性为text/plain，那么数据将以纯文本格式发送。
+ * 
+ *      <form action="register.php" enctype="text/plain" method="post" onsubmit="AJAXSubmit(this); return false;">
+ *      </form>
+ * 
+ *      发送的 HTTP 请求如下:
+ *          Content-Type: text/plain
+ *          foo=bar
+ *          baz=The first line.
+ * 
+ * - multipart/form-data
+ *      如果表单使用POST方法，enctype属性为multipart/form-data，那么数据将以混合的格式发送。
+ * 
+        <form
+            action="register.php"
+            method="post"
+            enctype="multipart/form-data"
+            onsubmit="AJAXSubmit(this); return false;"></form>   
+ * 
+ *      发送的 HTTP 请求如下:
+            Content-Type: multipart/form-data; boundary=---------------------------314911788813839
+
+            -----------------------------314911788813839
+            Content-Disposition: form-data; name="foo"
+
+            bar
+            -----------------------------314911788813839
+            Content-Disposition: form-data; name="baz"
+
+            The first line.
+            The second line.
+
+            -----------------------------314911788813839--
+ * 
  */
