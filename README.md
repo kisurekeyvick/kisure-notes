@@ -240,6 +240,10 @@
 ```
 # interview questions
 ```
+├── 2019-11-11
+│   ├── exports-module.exports.js           关于export和module.export的了解
+│   ├── node.fs.js                          关于node的fs模块
+│
 ├── 2019-11-1
 │   ├── web-performance-optimization.js     web性能优化
 │
