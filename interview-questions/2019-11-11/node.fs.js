@@ -171,3 +171,70 @@ fs.open(filePath, 'r', '0666', (err, fd) => {
  * 
  * fs.rmdir(path, (err) => {});
  */
+
+/**
+ * (12) 小文件拷贝
+ */
+const fileName_1 = path.resolve(__dirname, 'data.txt');
+fs.readFile(fileName_1, (err, data) => {
+    if (err) {
+        throw err;
+    }
+    // 得到文件内容
+    const dataSrc = data.toString();
+    // 写入文件
+    const fileName_2 = path.resolve(__dirname, 'copyData.txt');
+    fs.writeFile(fileName_2, dataSrc, (err) => {
+        if (err) {
+            throw err;
+        }
+    });
+});
+
+/**
+ * (13) 大文件拷贝
+ * 
+ * 如果是一个大文件几百M一次性读取写入不现实，所以需要多次读取多次写入，
+ * 接下来使用文件操作的高级方法对大文件和文件大小未知的情况实现一个 copy 函数。
+ */
+function copy(src, dest, size = 16 * 1024, callBack) {
+    // 打开源文件
+    fs.open(src, 'r', (err, readFd) => {
+        // 打开目标文件
+        fs.open(dest, 'w', (err, writeFd) => {
+            let buf = Buffer.alloc(size);
+            let readed = 0; // 下次读取文件的位置
+            let writed = 0; // 下次写入文件的位置
+
+            function next() {
+                fs.read(readFd, buf, 0, size, readed, (err, bytesRead) => {
+                    readed += bytesRead;
+                    // 如果得不到内容，则关闭
+                    if (!bytesRead) {
+                        fs.close(readFd, closeErr => {
+                            console.log('关闭源文件');
+                        });
+                    }
+                    // 写入
+                    fs.write(writeFd, buf, 0, bytesRead, writed, (err, bytesWrite) => {
+                        // 如果没有内容可同步缓存，那么就关闭文件执行回调
+                        if (!bytesWrite) {
+                            fs.fsync(writeFd, err => {
+                                fs.close(writeFd, err => {
+                                    return !err && callBack();
+                                });
+                            });
+                        }
+
+                        writed += bytesWrite;
+
+                        // 继续读取，写入
+                        next();
+                    });
+                });
+            }
+
+            next();
+        });
+    });
+}
