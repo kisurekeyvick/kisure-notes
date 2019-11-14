@@ -161,6 +161,10 @@
 
 # Common文件目录说明
 ```
+├── 2019-11-13
+│   ├── optimize.js                 关于v8的js解析，以及优化js代码的方式
+│   ├── element.childNodes.js       子元素数量和遍历子元素
+│ 
 ├── 2019-11-4
 │   ├── canvas.js                   canvas的相关知识
 │
