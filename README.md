@@ -161,6 +161,16 @@
 
 # Common文件目录说明
 ```
+├── 2019-11-18
+│   ├── ifelse-Map.js               关于使用ES6的Map来替代if else的复杂逻辑
+│
+├── 2019-11-13
+│   ├── optimize.js                 关于v8的js解析，以及优化js代码的方式
+│   ├── element.childNodes.js       子元素数量和遍历子元素
+│ 
+├── 2019-11-4
+│   ├── canvas.js                   canvas的相关知识
+│
 ├── 2019-9-30
 │   ├── js-feature.js               几个js常用的技巧和鲜为人知的特性
 │
@@ -237,6 +247,23 @@
 ```
 # interview questions
 ```
+├── 2019-11-18
+│   ├── typescript.ts                       ts接口的继承及其注意点，type和interface的作用和区别
+│   ├── promise.js                          promise的相关问题
+│
+├── 2019-11-14
+│   ├── handwritten.js                      (1) 手写一个new
+│                                           (2) 手写一个JSON.stringify
+│                                           (3) 手写JSON.parse
+│                                           (4) 手写一个call和apply
+│                                           (5) 手写一个bind
+│                                           (6) 手写继承(寄生组合)
+│                                           (7) 手写一个promise
+│
+├── 2019-11-11
+│   ├── exports-module.exports.js           关于export和module.export的了解
+│   ├── node.fs.js                          关于node的fs模块
+│
 ├── 2019-11-1
 │   ├── web-performance-optimization.js     web性能优化
 │
