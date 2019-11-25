@@ -258,6 +258,15 @@
 ```
 # interview questions
 ```
+├── 2019-11-25
+│   ├── five-api.js                         (1)手写深拷贝
+│                                           (2)手写Object.create
+│                                           (3)手写map
+│                                           (4)手写reduce
+│                                           (5)简单的单例模式(使用闭包和proxy)
+│
+│   ├── singleton-pattern.js                单例模式
+│
 ├── 2019-11-21
 │   ├── tcp-3-4.js                          三次握手和四次挥手
 │
