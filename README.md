@@ -264,6 +264,9 @@
 ```
 # interview questions
 ```
+├── 2019-11-28
+│   ├── web-safety.js                       web安全：同源策略，xss，csrf
+│
 ├── 2019-11-25
 │   ├── five-api.js                         (1)手写深拷贝
 │                                           (2)手写Object.create
