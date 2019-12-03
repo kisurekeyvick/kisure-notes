@@ -213,6 +213,9 @@
         删除分支
         - git branch -d 分支名
             删除你需要删除的分支名
+
+        删除远程分支
+        - git push origin --delete feature_order-query
     */
 
     /* 
