@@ -174,6 +174,16 @@
 
 # Common文件目录说明
 ```
+├── 2019-12-29
+│   ├── index.js                    js的7个新特性：(1)#可以在class中代表私有
+│                                               （2）a??500,??代表是否为null或者undefined
+│                                                 (3) a?.b?.c 可选链操作符
+│                                                 (4) js的class可以存在static
+│                                                 (5) BigInt用于超大数字计算
+│                                                 (6) await可以用于在顶层内容中的使用
+│                                                 (7) weekMap,weekSet,weekRef用于弱引用
+│
+│
 ├── 2019-11-26
 │   ├── list.js                     双向链表
 │
@@ -270,6 +280,10 @@
 ```
 # interview questions
 ```
+├── 2019-12-29
+│   ├── react-vm.js                         关于虚拟dom的基本概念和理解
+│   ├── react-diff.js                       react的diff算法
+│
 ├── 2019-12-2
 │   ├── tcp-http.js                         tcp，http基础知识
 │
