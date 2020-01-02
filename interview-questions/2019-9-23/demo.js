@@ -144,3 +144,72 @@ function quickSort(arr) {
 
     return quickSort(left).concat(point, quickSort(right));
 }
+
+function insertionSort(data) {
+    for (let i = 1; i < data.length; i++) {
+        let key = data[i];
+        let j = i - 1;
+
+        while (j >= 0 && data[j] > key) {
+            data[j + 1] = key;
+            j --;
+        }
+
+        data[j + 1] = key;
+    }
+
+    return data;
+}
+
+function mergeSort(arr) {
+    if (arr.length < 2) {
+        return arr;
+    }
+
+    const middle = Math.floor(arr.length/2);
+    const left = arr.slice(0, middle);
+    const right = arr.slice(middle);
+
+    return merge(mergeSort(left), mergeSort(right));
+}
+
+function merge(left, right) {
+    let result = [];
+    while(left.length && right.length) {
+        if (left[0] <= right[0]) {
+            result.push(left.shift());
+        } else {
+            result.push(right.shift());
+        }
+    }
+
+    while(left.length) {
+        result.push(left.shift());
+    }
+
+    while(right.length) {
+        result.push(right.shift());
+    }
+
+    return result;
+}
+
+function quickSort(arr) {
+    if (arr.length === 0) {
+        return [];
+    }
+
+    let left = [];
+    let right = [];
+    let point = arr[0];
+
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] > point) {
+            right.push(arr[i])
+        } else {
+            left.push(arr[i])
+        }
+    }
+
+    return quickSort(left).concat(point, quickSort(right));
+}
