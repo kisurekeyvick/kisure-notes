@@ -213,3 +213,131 @@ function quickSort(arr) {
 
     return quickSort(left).concat(point, quickSort(right));
 }
+
+
+
+function bubbleSort(data) {
+    let temp;
+    for (let i = data.length; i > 0; i--) {
+        for (let j = 0; j < i - 1; j++) {
+            if (data[j] > data[j+1]) {
+                temp = data[j];
+                data[j] = data[j + 1];
+                data[j + 1] = temp;
+            }
+        }
+    }
+
+    return data;
+}
+
+function selectionSort(data) {
+    for (let i = 0; i < data.length; i++) {
+        let temp;
+        let min = data[i];
+        let index = i;
+
+        for (let j = i + 1; j < data.length; j++) {
+            if (data[j] < min) {
+                min = data[j];
+                index = j;
+            }
+        }
+
+        temp = data[i];
+        data[i] = min;
+        data[index] = temp;
+    }
+}
+
+function insertionSort(data) {
+    for(let i = 1; i < data.length; i++) {
+        let cruV = data[i];
+        let j = i - 1;
+        
+        while(j > 0 && data[j] > cruV) {
+            data[j + 1] = data[j];
+            j --;
+        }
+
+        data[j + 1] = cruV;
+    }
+
+    return data;
+}
+
+function mergeSort(data) {
+    if (data.length < 2) {
+        return data;
+    }
+
+    let point = Math.floor(data.length / 2);
+    let left = data.slice(0, point);
+    let right = data.slice(point);
+
+    return merge(mergeSort(left), mergeSort(right));
+}
+
+function merge(left, right) {
+    let result = [];
+    
+    while(left.length && right.length) {
+        if (left[0] < right[0]) {
+            result.push(left.shift());
+        } else {
+            result.push(right.shift());
+        }
+    }
+
+    while(left.length) {
+        result.push(...left);
+    }
+
+    while(right.length) {
+        result.push(...right);
+    }
+
+    return result;
+}
+
+function quickSort(data) {
+    if (data.length === 0) {
+        return [];
+    }
+
+    let point = data[0];
+    let left = [];
+    let right = [];
+
+    for (let i = 1; i< data.length; i++) {
+        if (data[i] < point) {
+            left.push(data[i]);
+        } else {
+            right.push(data[i]);
+        }
+    }
+
+    return quickSort(left).concat(point, quickSort(right));
+}
+
+function shallSort(data) {
+    let temp;
+    let increment = data.length;
+
+    do {
+        increment = Math.floor(increment/3) + 1;
+        for (let i = increment; i< data.length; i++) {
+            if (data[i] < data[i - increment]) {
+                temp = data[i];
+
+                for (let j = i - increment; j >= 0 && temp < data[j]; j -= increment) {
+                    data[j + increment] = data[j];
+                }
+                data[j + increment] = temp;
+            }
+        }
+
+    } while(increment > 1)
+
+    return data;
+}
