@@ -289,6 +289,9 @@
 ```
 # interview questions
 ```
+├── 2020-1-6
+│   ├── err.html                            关于前端错误处理
+│
 ├── 2019-12-29
 │   ├── react-vm.js                         关于虚拟dom的基本概念和理解
 │   ├── react-diff.js                       react的diff算法
