@@ -479,3 +479,82 @@ function quickSort(arr) {
 
     return quickSort(left).concat(point, quickSort(right));
 }
+
+
+
+
+
+
+function bubbleSort(arr) {
+    let temp;
+    for (let i = arr.length; i > 0 ; i--) {
+        for (let j = 0; j < i; j++) {
+            if (arr[j] > arr[j + 1]) {
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+
+    return arr;
+}
+
+function selectionSort(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        let temp;
+        let min = arr[i];
+        let index = i;
+
+        for (let j = i + 1; j < arr.length; j ++) {
+            if (arr[j] < min) {
+                min = arr[j];
+                index = j;
+            }
+        }
+
+        temp = arr[i];
+        arr[i] = arr[index];
+        arr[index] = temp;
+    }
+
+    return arr;
+}
+
+function insertionSort(arr) {
+    for (let i = 1; i < arr.length; i ++) {
+        let curV = arr[i];
+        let j = i - 1;
+
+        while(j >= 0 && arr[j] > curV) {
+            arr[j + 1] = arr[j];
+            j --;
+        }
+
+        arr[j + 1] = arr[i];
+    }
+
+    return arr;
+}
+
+function shallSort(arr) {
+    let i;
+    let temp;
+    let increment = arr.length;
+    do {
+        increment = Math.floor(increment / 3) + 1;
+        for (i = increment; i < arr.length; i++) {
+            if (arr[i -increment] > arr[i]) {
+                temp = arr[i];
+                
+                for (let j = i - increment; j > 0 && arr[j] > temp; j-=increment) {
+                    arr[j + increment] = arr[j];
+                }
+
+                arr[j+increment] = temp;
+            }
+        }
+    } while(increment > 1);
+
+    return arr;
+}

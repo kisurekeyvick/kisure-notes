@@ -14,19 +14,23 @@
  *      如果数值超过这个范围，请返回  INT_MAX (231 − 1) 或 INT_MIN (−231) 。
  */
 
+/**
+ * @desc 自己写的一个方法
+ * @param {*} str 
+ */
 var myAtoi = function(str) {
     str = str.replace(/^\s*/, '');
     const firstStr = str.slice(0 , 1);
 
     /** 首位不是-或者不是数字，则返回0 */
-    if (!(/\d || '-'/.test(firstStr))) {
+    if (!(/\d || '-' || \+/.test(firstStr))) {
         return 0;
     }
 
     const isMinusSign = firstStr === '-';
-    if (isMinusSign) {
-        str = str.replace('-', '');
-    }    
+    if (firstStr === '-' || firstStr === '+') {
+        str = str.replace(firstStr, '');
+    }
 
     const strArr = str.split('');
     const isNumber = str => /\d/.test(str);
@@ -41,5 +45,29 @@ var myAtoi = function(str) {
 
     const value = isMinusSign ? -1 * Number(numberStr) : Number(numberStr);
 
-    
+    if (value < -1 * Math.pow(2, 31)) {
+        return -1 * Math.pow(2, 31);
+    } else if(value > Math.pow(2, 31) - 1) {
+        return Math.pow(2, 31) - 1;
+    } else {
+        return value;
+    }
+};
+
+/** 
+ * @desc 其他写法
+ */
+var myAtoiOther = function(str) {
+    str = str.trim();
+
+    if (!/^[-|+]?\d+/.test(str)) {
+        return 0;
+    }
+
+    let val = parseInt(str.match(/^[+|-]?\d+/));
+    let borderValue = Math.pow(2, 31);
+    let min = -1 * borderValue;
+    let max = borderValue - 1;
+
+    return Math.max(Math.min(val, max), min);
 };

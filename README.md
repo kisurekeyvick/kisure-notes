@@ -15,6 +15,8 @@
 # leetcode 算法
 ```
 ├── leetcode
+│   ├── string-to-integer-atoi.js   字符串转换整数
+│   ├── three-number-sum.js         三数之和
 │   ├── two-number-sum.js           两数之间的和
 │
 ```
@@ -289,6 +291,9 @@
 ```
 # interview questions
 ```
+├── 2020-1-7
+│   ├── debounce-throttle.js                节流去抖动原理分析
+│
 ├── 2020-1-6
 │   ├── err.html                            关于前端错误处理
 │
