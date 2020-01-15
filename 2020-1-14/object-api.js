@@ -77,6 +77,11 @@ Object.prototype.isPrototypeOf(s); // true
 String.prototype.isPrototypeOf(s); // true
 Array.prototype.isPrototypeOf(s); // false
 
+// 又或者
+function P() {}
+const newP = new P();
+P.prototype.isPrototypeOf(newP);    // true 其中目标对象是newP，当前对象的原型是：P.prototype
+
 /** 
  * Object.prototype.propertyIsEnumerable(prop)
  * 
@@ -204,7 +209,7 @@ var person = {legs:2};
 Object.seal(person);
 Object.isSealed(person); // true
 Object.getOwnPropertyDescriptor(person, 'legs');
-// {value: 2, writable: false, enumerable: false, configurable: false}
+// {value: 2, writable: true, enumerable: true, configurable: false}
 delete person.legs; // false (不可删除，不可配置)
 Object.defineProperty(person, 'legs',{value:2});
 person.legs; // 2
@@ -368,7 +373,7 @@ Object.entries(obj); // [['a',1],['b',2],['c',3]]
  * Object.fromEntries() 是 Object.entries()的逆操作。
  */
 var arr = [['a',1],['b',2],['c',3]];
-Object.fromEntries(obj); // {a: 1, b: 2, c: 3}
+Object.fromEntries(arr); // {a: 1, b: 2, c: 3}
 var entries = new Map([
     ['name', '若川'],
     ['age', 18]

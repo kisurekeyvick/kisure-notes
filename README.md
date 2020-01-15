@@ -303,6 +303,10 @@
 ```
 # interview questions
 ```
+├── 2020-1-15
+│   ├── pseudo array transformation.js      将伪数组转化为数组
+│   ├── arr-duplicate-removal.js            数组去重
+│ 
 ├── 2020-1-7
 │   ├── debounce-throttle.js                节流去抖动原理分析
 │
