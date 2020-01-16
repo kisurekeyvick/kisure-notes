@@ -176,6 +176,9 @@
 
 # Common文件目录说明
 ```
+├── 2020-1-16
+│   ├── Simple JavaScript modularity.js     深入浅出js模块化
+│ 
 ├── 2020-1-14
 │   ├── pack-to-force.js                    js黑魔法
 │                                            (1)使用^判断数字是否相等
