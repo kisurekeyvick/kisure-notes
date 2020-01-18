@@ -341,3 +341,130 @@ function shallSort(data) {
 
     return data;
 }
+
+
+
+
+
+
+
+
+
+function bubbleSort(arr) {
+    let temp;
+    for (let i = arr.length; i > 0; i--) {
+        for (let j = 0; j < i; j++) {
+            if (arr[j+1] < arr[j]) {
+                temp = arr[j+1];
+                arr[j+1] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+}
+
+function selectionSort(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        let min = arr[i];
+        let temp;
+        let index = i;
+
+        for (let j = 0; j < i ;j++) {
+            if (min > arr[j]) {
+                min = arr[j];
+                index = j;
+            }
+        }
+
+        temp = arr[i];
+        arr[i] = min;
+        arr[index] = temp;
+    }
+
+    return arr;
+}
+
+function insertionSort(arr) {
+    for (let i = 1; i< arr.length; i++) {
+        let curV = arr[i];
+        let j = i - 1;
+
+        while(j >= 0 && arr[j] > curV) {
+            arr[j + 1] = arr[j];
+            j --;
+        }
+
+        arr[j + 1] = curV;
+    }
+
+    return arr;
+}
+
+function shallSort(arr) {
+    let increment = arr.length;
+    let i;
+    let temp;
+
+    do{
+        increment = Math.floor(increment/3)+1;
+        for ( i = increment; i < arr.length; i++) {
+            if (arr[i] < arr[i - increment]) {
+                temp = arr[i];
+                for(let j = i - increment; j >= 0 && temp < arr[j]; j -= increment) {
+                    arr[j + increment] = arr[j];
+                }
+                arr[j + increment] = temp;
+            }
+        }
+    } while(increment > 1)
+    return arr;
+}
+
+function mergeSort(arr) {
+    const point = Math.floor(arr/2);
+    const left = arr.slice(0, point);
+    const right = arr.slice(point);
+    return merge(mergeSort(left), mergeSort(right));
+}
+
+function merge(left, right) {
+    let result = [];
+    
+    while(left.length && right.length) {
+        if (left[0] < right[0]) {
+            result.push(left.shift());
+        } else {
+            result.push(right.shift());
+        }
+    }
+    
+    while(left.length) {
+        result.push(left.shift());
+    }
+
+    while(right.length) {
+        result.push(right.shift());
+    }
+
+    return result;
+}
+
+function quickSort(arr) {
+    if (arr.length === 0) {
+        return [];
+    }
+
+    const point = arr[0];
+    let left = [];
+    let right = [];
+
+    for (let i = 1; i< arr.length; i++) {
+        if (arr[i] < point) {
+            left.push(arr[i]);
+        } else {
+            right.push(arr[i]);
+        }
+    }
+
+    return quickSort(left).concat(point, quickSort(right));
+}

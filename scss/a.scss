@@ -1,0 +1,49 @@
+$width: 10px;
+p {
+    width: (100 - $width)*$width;
+}
+
+.ext {
+    color: red;
+    font-size: 12px;
+}
+
+.nice {
+    @extend .ext;
+}
+
+@each $var in apple, orange, banana {
+    .item-#{$var} {
+        &::after {
+            content: $width;
+        }
+    }
+}
+
+@for $var from 1 to 5 {
+    .item-#{$var} {
+        font-size: 12px-$width;
+    }
+}
+
+.content a%demo {
+    color: red;
+}
+
+.title {
+    @extend %demo;
+}
+
+@function cal($width, $height) {
+    @return $width * $height;
+}
+
+$i: 10;
+
+@while ($i > 0) {
+    .item-#{$i} {
+        font-size: #{$i}px;
+    }
+
+    $i: $i - 2;
+}
