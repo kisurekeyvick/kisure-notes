@@ -62,12 +62,13 @@ const resolvePost = req =>
     new Promise(resolve => {
         let chunk = "";
         req.on("data", data => {
-        chunk += data;
+            chunk += data;
+        });
+        
+        req.on("end", () => {
+            resolve(JSON.parse(chunk));
+        });
     });
-    req.on("end", () => {
-        resolve(JSON.parse(chunk));
-    });
-});
 
 // 合并切片
 const mergeFileChunk = async (filePath, filename) => {
@@ -112,3 +113,20 @@ server.on('request', async (req, res) => {
  * 接着使用 fs.writeFileSync 先创建一个空文件，这个空文件的文件名就是切片文件夹名 + 后缀名组合而成，
  * 随后通过 fs.appendFileSync 从切片文件夹中不断将切片合并到空文件中，每次合并完成后删除这个切片，等所有切片都合并完毕后最后删除切片文件夹。
  */
+
+
+/** 
+ * 显示上传进度条
+ * 
+ * 上传进度分两种，一个是每个切片的上传进度，另一个是整个文件的上传进度，
+ * 而整个文件的上传进度是基于每个切片上传进度计算而来，所以我们需要先实现切片的上传进度。
+ * 
+ * XMLHttpRequest 原生支持上传进度的监听，只需要监听 upload.onprogress 即可，
+ * 我们在原来的 request 基础上传入 onProgress 参数，给 XMLHttpRequest 注册监听事件：
+ * 
+ * 这里我们还是查看[http.ts]
+ * 
+ * 由于每个切片都需要触发独立的监听事件，所以还需要一个工厂函数，根据传入的切片返回不同的监听函数。
+ */
+
+ 

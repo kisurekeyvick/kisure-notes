@@ -21,6 +21,24 @@ export default {
    * 
    * 分为2个步骤：(1) 对文件进行切片  (2) 将切片传输给服务端
    */
+
+  /** 
+   * 显示上传进度条
+   * 
+   * XMLHttpRequest 原生支持上传进度的监听，只需要监听 upload.onprogress 即可，
+   * 我们在原来的 request 基础上传入 onProgress 参数，给 XMLHttpRequest 注册监听事件：
+   */
+
+  /** 
+   * 断点续传
+   * 
+   * 断点续传的原理在于前端/服务端需要记住已上传的切片，这样下次上传就可以跳过之前已上传的部分，
+   * 有两种方案实现记忆的功能：
+   * (1) 前端使用 localStorage 记录已上传的切片 hash。
+   * (2) 服务端保存已上传的切片 hash，前端每次上传前向服务端获取已上传的切片。
+   * 
+   * 第一种是前端的解决方案，第二种是服务端，而前端方案有一个缺陷，如果换了个浏览器就失去了记忆的效果，所以这里选取后者。
+   */
 }
 </script>
 <template>
@@ -39,6 +57,19 @@ export default {
                   data: []
               }
           }),
+      computed: {
+        uploadPercentage() {
+          if (!this.container.file || !this.data.length) {
+            return 0;
+          }
+
+          const loaded = this.data.map(item => {
+            return item.size * item.percentage;
+          }).reduce((acc, cur) => acc + cur);
+
+          return parseInt((loaded / this.container.file.size).toFixed(2));
+        }
+      },    
       methods: {
           request() {},
           handleFileChange() {},
@@ -48,7 +79,7 @@ export default {
               const chunkSize = Math.ceil(file.size / length);
               let cur = 0;
               while (cur < file.size) {
-                  fileChunkList.push({ file: file.slice(cur, cur, chunkSize) });
+                  fileChunkList.push({ file: file.slice(cur, cur + chunkSize) });
                   cur += chunkSize;
               }
 
@@ -64,7 +95,8 @@ export default {
               return { formData };
             }).map(async ({ formData }) => this.request({
                 url: "http://localhost:3000",
-                data: formData
+                data: formData,
+                onProgress: this.createProgressHandler(this.data[index]),
             }));
 
             await Promise.all(requestList); // 并发切片
@@ -79,10 +111,21 @@ export default {
             this.data = fileChunkList.map(({ file }, index) => ({
                 chunk: file,
                 // 文件名 + 数组下标
-                hash: this.container.file.name + "-" + index
+                hash: this.container.file.name + "-" + index,
+                index,
+                percentage:0
             }));
 
             await this.uploadChunks();
+          },
+          /** 
+           * 每个切片在上传时都会通过监听函数更新 data 数组对应元素的 percentage 属性，
+           * 之后把将 data 数组放到视图中展示即可。
+           */
+          createProgressHandler(item) {
+            return e => {
+              item.percentage = parseInt(String((e.loaded / e.total) * 100));
+            };
           }
       }
   }
