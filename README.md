@@ -15,6 +15,8 @@
 # leetcode 算法
 ```
 ├── leetcode
+│   ├── string-to-integer-atoi.js   字符串转换整数
+│   ├── three-number-sum.js         三数之和
 │   ├── two-number-sum.js           两数之间的和
 │
 ```
@@ -174,6 +176,21 @@
 
 # Common文件目录说明
 ```
+├── 2020-1-16
+│   ├── Simple JavaScript modularity.js     深入浅出js模块化
+│ 
+├── 2020-1-14
+│   ├── pack-to-force.js                    js黑魔法
+│                                            (1)使用^判断数字是否相等
+│                                            (2)使用^切换变量0或1
+│                                            (3)使用&判断奇偶性
+│                                            (4)使用！！将数字转化为boolean值
+│                                            (5)使用string.link()创建链接
+│                                            (6)使用1/0来代替Infinity
+│                                            (7)for循环条件的间歇
+│
+│   ├── object-api.js                       object的api解析
+│
 ├── 2020-1-2
 │   ├── pic.js                              深度优先遍历，广度优先遍历
 │
@@ -289,6 +306,16 @@
 ```
 # interview questions
 ```
+├── 2020-1-15
+│   ├── pseudo array transformation.js      将伪数组转化为数组
+│   ├── arr-duplicate-removal.js            数组去重
+│ 
+├── 2020-1-7
+│   ├── debounce-throttle.js                节流去抖动原理分析
+│
+├── 2020-1-6
+│   ├── err.html                            关于前端错误处理
+│
 ├── 2019-12-29
 │   ├── react-vm.js                         关于虚拟dom的基本概念和理解
 │   ├── react-diff.js                       react的diff算法

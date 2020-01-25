@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <a href="https://mp.weixin.qq.com/s/0Tz5axSYlRaNMzImhIcfog">文章链接</a>
+</body>
+</html>
+<!-- <script>
+    xxxxx
+    window.onerror = function() {
+        window.location.href = 'https://www.baidu.com/';
+    }
+
+    /** 
+     *  xxxx未定义，致命错误，之前无错误捕获处理机制，页面没有跳转到百度
+     */
+</script> -->
+<!-- <script>
+    window.onerror = function() {
+        console.log('全局捕获错误');
+    }
+
+    try {
+        console.log('try');
+    } catch(e) {
+        console.log(e, 'error');
+    } finally {
+        throw new Error('抛出错误');
+        console.log('finally');
+    }
+
+    /**
+     * 因为try里面才会捕获错误，一旦抛出错误就会被全局捕获错误的函数捕获
+     * 最终输出顺序：    
+     *      try  
+     *      抛出错误   
+     *      全局捕获到错误
+     */
+</script> -->
+<!-- <script>
+    window.onerror = function(e) {
+        console.log('全局捕获错误', e);
+    }
+
+    function test() {
+        try {
+            return console.log('try');
+        } catch(e) {
+            return console.log(e, 'error');
+        } finally {
+            throw new Error('抛出错误');
+            return console.log('finally');
+        }
+    }
+
+    test();
+
+    /**
+     * 调用test，执行test,执行完了try同步代码后，执行抛出Error，结束test的函数的调用
+     * 注意！！！ --- 只要函数内部抛出错误，就会结束这个函数的调用并且出栈
+     * 全局捕获到的错误，还是‘抛出错误’这个我们自己定义的错误内容,console.log(a)并没有被执行到
+     * 
+     * 输出顺序：
+     *      try
+     *      全局捕获错误 Uncaught Error: 抛出错误
+     *      抛出错误
+     */
+</script> -->
+<script>
+    /** demo3 */
+    window.onerror = function(e) {
+        console.log('全局捕获错误', e);
+    }
+
+    function test() {
+        try {
+            console.log('try');
+            throw new Error('抛出错误');
+        } catch (e) {
+            return console.log(e, 'error')
+        } finally {
+            return console.log('finally');
+        }
+
+        console.log(a);
+    }
+
+    test();
+
+    /** 
+     * 这里主要考察的是函数的抛出错误配合finally的执行，我们一直认为，只要函数内部抛出错误，
+     * 就会结束这个函数调用，立马出栈。
+     * 所以return和throw new Error不能在一起用，但是finally却还是依然会执行。
+     * finally，顾名思义，最后都会执行
+     * 
+     * 输出顺序：
+     *      try
+     *      抛出错误 error
+     *      finally
+     */
+</script>
+<script>
+    /** 
+     * 加入webpack工程化构建的变异版本，选中此html为模板，问， 如果其他通过webpack构建的文件发生了致命错误，
+     * 例如因为做了tree sharking，没有兼容低版本浏览器，此时可以捕获到全局错误吗?
+     * 
+     * 如 demo3的案例
+     * 
+     * 答案是不可以捕获到，因为经过webpack打包后，代码会变成：[webpack打包后的html.jpg]
+     * 
+     * 如果此时其他模块发生了致命错误，例如const这种代码跑在IE6中，那么就会直接致命错误，
+     * 阻断浏览器解析代码，页面挂掉。js引擎也不会去解析下面的代码～ 还没有运行到window.onerror这里就挂了 
+    */
+</script>
+<script>
+    /**
+     * - window.onerror与window.addEventListener('error')捕获js运行时错误
+     * 
+     * window.onerror与window.addEventListener('error')捕获js运行时错误使用window.onerror和window.addEventListener('error')都能捕获，
+     * 但是window.onerror含有详细的error堆栈信息，存在error.stack中，所以我们选择使用onerror的方式对js运行时错误进行捕获。
+     * 
+     * 
+     * - 资源加载错误使用addEventListener去监听error事件捕获
+     * 实现原理：当一项资源（如<img>或<script>）加载失败，加载资源的元素会触发一个Event接口的error事件，
+     *          并执行该元素上的onerror()处理函数。
+     * 
+     *          这些error事件不会向上冒泡到window，不过能被window.addEventListener在捕获阶段捕获。
+     * 但这里需要注意，由于上面提到了addEventListener也能够捕获js错误，因此需要过滤避免重复捕获，判断为资源错误的时候才进行处理。
+     * 
+     * 
+     */
+     window.addEventListener('error', (e) => {
+        console.log('dom2', e)
+    },true)
+    /**
+     * 这样就可以捕获到任意的图片等资源加载错误的信息
+    */
+</script>
+<script>
+    /** 
+     * - Error Boundaries（错误边界）配合webpack+系统的onerror错误捕获
+     * 
+     * 我们先定义一个错误边界，然后html模板文件中，依旧有我们的那段代码
+    */
+    import React from 'react';
+    export default class App extends React.PureComponent {
+        state = {
+            isError: false
+        };
+
+        componentDidCatch(err, info) {
+            this.setSate({
+                isError: true
+            });
+            console.log(err, info);
+        }
+
+        render() {
+            const { isError } = this.state;
+            return (
+                <div>
+                    { isError ? <div>错误捕捉展示页面</div> : this.props.children }
+                </div>
+            )
+        }
+    }
+
+    /**
+     * 然后我们在children组件中自己抛出一个错误 [子组件内部抛出错误.jpg]
+     * [错误边界展示.jpg]
+     * 
+     * 以此说明：错误被React错误边界捕获后，就不会再被window.onerror函数捕获
+     * 同样的，如果使用window.addEventListenr('error')，也没有被捕获，，无论第三个参数是false还是true,只要被错误边界捕获后，都不会再被捕获。
+    */
+
+    /**
+     * 如果是语法错误，如下所示：
+     * 结果： 如果是同步的语法错误，在try catch中就可以被捕获，不会冒泡到window.onerror事件中
+     */
+    function test() {
+        try {
+            console.log('try');
+            undefined.map(a => {
+                console.log(a);
+            });
+        } catch(e) {
+            return console.log(e, 'error');
+        } finally {
+            return console.log('finally');
+        }
+
+        console.log(a);
+    }
+    test();
+
+    /**
+     * 如果是异步的语法错误，如下所示：
+     * 结果： 最终被全局到error回调函数捕获
+     */
+     function test() {
+        try {
+            console.log('try');
+            setTimeout(() => {
+                undefined.map(a => {
+                    console.log(a);
+                });
+            }, 1000);
+        } catch(e) {
+            return console.log(e, 'error');
+        } finally {
+            return console.log('finally');
+        }
+
+        console.log(a);
+    }
+    test();
+
+    /**
+     * 这里要说明一点，如果是人为抛出错误 throw new Error，error函数是可以捕获的。
+     * 但是一旦是语法错误，那么需要在error函数中return true，这样异常才不会往上继续抛出。
+     * 如下：
+     */
+    window.onerror = function(e) {
+        // ...
+        return true;
+    }
+
+    // 于是：全局错误捕获，并且控制台不会出现未捕获的错误了～
+    /**
+     * 查看如下顺序图片：
+     * [为什么捕获了，还会爆出错误？.jpg]
+     * [捕捉错误后return true.jpg]
+     * [全局错误捕获，并且控制台不会出现未捕获的错误了.jpg]
+    */
+
+    /**
+     * 静态资源的请求错误，不会冒泡到window.error事件中。只能通过在捕获阶段捕获到这个错误
+     * 
+     * window.addEventListener('error', (e) => {
+     *      console.log('dom2', e)
+     * },true)
+     * 
+     * 
+     * 
+     * 一些图片的处理，可以类似这样，当请求的静态资源出现错误时候，可以更换请求地址，不会导致碎图：
+     * <img src='images/logo.png' onerror="javascript:this.src='images/logoError.png'"/>
+     */
+
+    /**
+     * Promise的捕获，对于频繁调用的函数，肯定是需要封装成promise风格的，统一处理错误，
+     * 统一接口捕获一次就可以了，因为onerror函数并不能捕获promise错误
+     * 
+     * 由于async await函数和promise可能比较多，项目中，为了防止没有捕获的promise出现，我们可以使用如下：
+     * window.addEventListener('unhandledrejection', function(e) {
+     *      e.preventDefault();
+     *      console.log('捕获异常', e);
+     *      return true; 
+     * })
+     */
+</script>
