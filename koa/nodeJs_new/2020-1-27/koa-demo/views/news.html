@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p>这是一个news界面</p>
+    <div>
+        <p>这是一个判断</p>
+        {{if num > 20}}
+            <p>数据为{{num}}</p>
+        {{else}}
+            <p>数据没有超过20</p>
+        {{/if}}
+    </div>
+    <div>
+        <p>这是一个循环数据</p>
+        <ul>
+            {{each list}}
+                <li>{{$index}}: {{list[$index]['name']}} {{list[$index]['age']}}</li>
+            {{/each}}
+        </ul>
+    </div>
+</body>
+</html>

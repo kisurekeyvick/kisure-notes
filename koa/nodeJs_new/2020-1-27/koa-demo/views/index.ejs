@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/css/header.css" />
+</head>
+<body>
+    <%- include('common/header.ejs') %>
+    
+    <p>这是一个ejs模板引擎</p>
+    <p>hello <%=name%>,年龄 <%=age%>岁</p>
+    <h2>下面是一个list列表</h2>
+    <ul>
+        <%for(let i = 0; i < list.length; i++){%>
+            <li>姓名：<%=list[i]['name']%>， 年龄：<%=list[i]['age']%></li>
+        <%}%>
+    </ul>
+    <p>下面是一个h3的标签：
+        <%-htmlFields%>
+    </p>
+    <div>
+        <p>下面是一个判断语句</p>
+        <%if(num > 20){%>
+            <p>当前的数字为<%=num%></p>
+        <%} else {%>
+            <p>数字太小了！！</p>
+        <%}%>
+    </div>
+    <div>
+        <p>这是一个全局的数据</p>
+        <p>姓名： <%=userInfo['name']%></p>
+    </div>
+    <img src="../static/img/timg.jpeg">
+</body>
+</html>

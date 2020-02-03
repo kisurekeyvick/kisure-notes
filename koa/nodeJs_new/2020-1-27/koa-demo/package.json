@@ -1,0 +1,22 @@
+{
+  "name": "nicefish",
+  "version": "1.0.0",
+  "description": "koa demo",
+  "main": "index.js",
+  "dependencies": {
+    "koa":"^2.11.0",
+    "koa-router":"^8.0.6",
+    "koa-views":"^6.2.1",
+    "koa-bodyparser":"^4.2.1",
+    "koa-static":"^5.0.0",
+    "art-template":"^4.13.2",
+    "koa-art-template":"^1.1.1",
+    "koa-session":"^5.12.3",
+    "ejs":"^3.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
