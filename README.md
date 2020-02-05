@@ -65,6 +65,16 @@
 │ 
 ```
 
+# Typescript
+```
+├── 2020-2-5
+│   ├── knowledge.ts                TS 常见问题整理
+│
+├── 2019-9-8
+│   ├── interface.ts
+│ 
+```
+
 # React文件目录说明
 ```
 ├── react
