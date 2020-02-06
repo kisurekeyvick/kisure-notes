@@ -453,3 +453,215 @@ greeterTwo.message = 'hey';
 let greeter2:Greeter = new greeterTwo();
 console.log(greeter2.greet());// 'hey'
 
+/** 
+ * (21) 当使用联合类型时，在类型未确定的情况下，默认只会从中获取共有的部分
+ * 
+ * - 使用类型断言
+ * - 可区分的联合类型（借助 never ）
+ */
+enum KindType{
+    square = 'square',
+    rectangle = 'rectangle',
+    circle = 'circle',
+}
+
+interface Square {
+    kind: KindType.square;
+    size: number;
+}
+
+interface Rectangle {
+    kind: KindType.rectangle;
+    width: number;
+    height: number;
+}
+
+interface Circle {
+    kind: KindType.circle;
+    radius: number;
+}
+
+type Shape = Square | Rectangle | Circle;
+
+function area1(s: Shape) {
+    // 如果联合类型中的多个类型，拥有共有的属性，那么就可以凭借这个属性来创建不同的类型保护区块
+    // 这里 kind 是共有的属性
+    switch (s.kind) {
+        case KindType.square:
+            return s.size * s.size;
+        case KindType.rectangle:
+            return s.height * s.width;
+        default:
+            return;
+    }
+}
+
+/** 
+ * (22) 在全局环境中，不能给某些变量声明类型
+ */
+let name_12: string;
+
+// 加了 export 后就不会报错
+// export {} 
+
+/** 
+ * (23) 扩展全局变量的类型
+ */
+interface String {
+    // 这里是扩展，不是覆盖，所以放心使用
+    double(): string;
+}
+
+String.prototype.double = function () {
+    return this + '+' + this;
+};
+console.log('hello'.double());
+
+// 如果加了这个export {}，就会报错
+// export {}
+
+interface Window {
+    myname: string
+}
+
+// 注意：这里的 window 要小写
+console.log(window);
+
+/** 
+ * 如果加了export {}，当前模块就会变成局部的
+ * 然后定义的类型 Window 就是局部的变量，不再是一个全局变量
+ * 所以上面给 Window 扩展属性/方法就失效了
+ */
+
+/** 
+ * (24) export = xxx 和 import xxx = require('xxx')
+ */
+/** 
+ * exports === module.exports // 即：这两个变量共用一个内存地址
+ * 
+ * 整体导出
+ * module.exports = {}
+ * 
+ * 导出多个变量
+ * exports.c = 3;
+ * exports.d = 4;
+ */
+
+// 一个 es6 模块默认导出，被一个 node 模块导入使用
+/** 
+ * 兼容性写法只在 TS 中有效 ！！！！！！
+ * 
+ * // a.es6.ts
+ * // 这里只能导出一个
+ * export = function () {
+ *     console.log("I'm default")
+ * }
+ * 
+ * // b.node.ts
+ * import fn = require('./a.es6.ts');
+ * fn();
+ */
+
+/** 
+ * (25)  如何在 Node 中使用 TS
+ * 
+ * - 安装相关声明文件，如：@types/node；
+ * - 因为 node 模块遵循 CommonJS 规范，一些 node 模块（如：express）的声明文件
+ *      用 export = xxx 导出模块声明。TS 进行类型推导时，会无法推断导致报错。
+ *      所以需要使用 import xxx from "xxx" 或者 import xxx = "xxx" 导入 node 模块；
+ */ 
+
+/** 
+ * (26) 使用 as 替代尖括号表示类型断言
+ * 
+ * - 在 TS 可以使用尖括号来表示类型断言，但是在结合 JSX 的语法时将带来解析上的困难。因此，TS 在 .tsx 文件里禁用了使用尖括号的类型断言
+ * - as 操作符在 .ts 文件和 .tsx 文件里都可用
+ */ 
+interface Person {
+    name: string;
+    age: number
+}
+
+let p1 = {age: 18} as Person;
+console.log(p1.name);
+
+// 这种写法在 .tsx 文件中会报错
+let p2 = <Person>{age: 18};
+console.log(p2.name);
+
+/** 
+ * (27) 如何对 JS 文件进行类型检查
+ */
+/** 
+ *  - 在 tsconfig.json 中可以设置 checkJs:true，对 .js 文件进行类型检查和错误提示。
+        通过在 .js 文件顶部添加 // @ts-nocheck 注释，让编译器忽略当前文件的类型检查。
+        相反，你可以通过不设置 checkJs:true 并在 .js 文件顶部添加一个 // @ts-check 注释，让编译器检查当前文件。
+        也可以在 tsconfig.json 中配置 include/exclude，选择/排除对某些文件进行类型检查 。
+        你还可以使用 // @ts-ignore 来忽略本行的错误。
+
+    - 在 .js 文件里，类型可以和在 .ts 文件里一样被推断出来。当类型不能被推断时，可以通过 JSDoc 来指定类型。
+ */
+
+/** 
+ * (28) 不要使用如下类型 Number，String，Boolean、Object，应该使用类型number、string、boolean、object
+ */ 
+/* 错误 */
+function reverse_1(s: String): String {
+    return '';
+};
+
+/* OK */
+function reverse_2(s: string): string {
+    return '';
+};
+
+/** 
+ * (29) 如何在解构一个函数 function fn({ x: number }) { } 时，即能给变量声明类型，又能给变量设置默认值
+ */
+// error
+function f({ x: number }) {
+    console.log(x);
+}
+
+// ok
+function f_2({x}: { x: number } = {x: 0}) {
+    console.log(x);
+}
+
+/** 
+ * (30) Pick 摘取返回的结果是一个对象（或者说新的接口），里面包含摘取到的属性
+ * 
+ * 从 T 中取出 一系列 K 的属性
+ * type Pick<T, K extends keyof T> = { [P in K]: T[P] };
+ */
+interface Test {
+    arr: string[],
+    age: number[]
+}
+// pick 摘取返回的结果 => {arr: string[]}
+let aaa_1: Pick<Test, 'arr'> = {arr: ['1']};
+let arr_2: Pick<Test, 'age'> = {age: [1]}
+
+/** 
+ * (31) 有时候我们需要复用一个类型，但是又不需要此类型内的全部属性，因此需要剔除某些属性
+ * 
+ * - TypeScript 3.5中,定义了新版本的“Omit”
+ * 
+ * - 这个方法在 React 中经常用到，当父组件通过 props 向下传递数据的时候，通常需要复用父组件的 props 类型，但是又需要剔除一些无用的类型。
+ */
+interface User {
+    username: string
+    id: number
+    token: string
+    avatar: string
+    role: string
+}
+type UserWithoutToken = Omit<User, 'token'>;
+
+/** 
+ * (32) 为什么在 exclude 列表里的模块还会被编译器使用
+ * 
+ * - 有时候是被 tsconfig.json 自动加入的如果编译器识别出一个文件是模块导入目标，
+ *      它就会加到编译列表里，不管它是否被排除了。因此，要从编译列表中排除一个文件，
+ *      你需要在排除它的同时，还要排除所有对它进行 import 或使用了 
+ */
