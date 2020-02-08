@@ -67,6 +67,10 @@
 
 # Typescript
 ```
+├── 2020-2-8
+│   ├── ts react                    ts在react中的一些问题
+│   ├── tsconfig                    ts的一些配置
+│
 ├── 2020-2-5
 │   ├── knowledge.ts                TS 常见问题整理
 │
