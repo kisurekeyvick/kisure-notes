@@ -67,6 +67,12 @@
 
 # Typescript
 ```
+├── 2020-2-10
+│   ├── knowledge.ts                TypeScript 强大的类型别名
+│
+├── 2020-2-9
+│   ├── ts-conditional-types.ts     TypeScript 参数简化实战（进阶知识点conditional types，中高级必会）
+│
 ├── 2020-2-8
 │   ├── ts react                    ts在react中的一些问题
 │   ├── tsconfig                    ts的一些配置
@@ -320,6 +326,10 @@
 ```
 # interview questions
 ```
+├── 2020-3-1
+│   ├── bom.js                              Bom的要点
+│   ├── js-promise.js                       手写一个promise
+│   
 ├── 2020-1-15
 │   ├── pseudo array transformation.js      将伪数组转化为数组
 │   ├── arr-duplicate-removal.js            数组去重

@@ -8,6 +8,7 @@
  * (1) 先简单的看一个条件类型的示例
  */
 function process<T extends string | null>(text: T): T extends string ? string : null {
+  return '' || null;
 }
 /** 
  * A extends B ? C : D
