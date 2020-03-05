@@ -196,6 +196,13 @@
 
 # Common文件目录说明
 ```
+├── 2020-3-5
+│   ├── reduce.js                           关于reduce的开发技巧
+│   
+├── 2020-3-4
+│   ├── ES10.js                             ES10的特性
+│   ├── skill.js                            js开发的一些技巧
+│   
 ├── 2020-1-16
 │   ├── Simple JavaScript modularity.js     深入浅出js模块化
 │ 
