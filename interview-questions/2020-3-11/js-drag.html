@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: gray;
+            position: absolute;
+        }
+        #div2{
+            width: 100px;
+            height: 100px;
+            background: orange;
+            position: absolute;
+            left: 100px;
+        }
+        #div3{
+            width: 100px;
+            height: 100px;
+            background: tomato;
+            position: absolute;
+            left: 200px;
+        }
+        #p {
+            margin-top: 200px;
+            width: 500px;
+            overflow: scroll;;
+        }
+        #inner {
+            width: 9000px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div id='p'>
+        <div id='inner'>
+            <div id="div1"></div>
+            <div id="div2"></div>
+            <div id="div3"></div>
+        </div>
+    </div>
+    
+</body>
+</html>
+<script src="./js-drag.js"></script>

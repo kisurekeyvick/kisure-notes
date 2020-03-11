@@ -47,20 +47,20 @@ let heroTwo = {
     equipment:['马','长枪']
 };
 
-Object.defineProperty(heroTwo.equipment, 'push', {
-    value() {
-        console.log('添加数据');
-        console.log('argument', arguments[0]);
-        this[this.length] = arguments[0];
-    },
-    // get() {
-    //     console.log(`get方法，返回${value}`);
-    //     return value;
+Object.defineProperty(heroTwo.name, 'push', {
+    // value() {
+    //     console.log('添加数据');
+    //     console.log('argument', arguments[0]);
+    //     this[this.length] = arguments[0];
     // },
-    // set(val) {
-    //     console.log(`获取到对应的值${val}`);
-    //     return val;
-    // }
+    get() {
+        console.log(`get方法，返回${value}`);
+        return value;
+    },
+    set(val) {
+        console.log(`获取到对应的值${val}`);
+        return val;
+    }
 });
 
 /**

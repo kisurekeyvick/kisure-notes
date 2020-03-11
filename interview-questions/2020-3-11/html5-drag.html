@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #target{
+            width: 100px;
+            height: 100px;
+            background: #dac1df;
+        }
+        #section{
+            height: 100px;
+            width: 100%;
+            border: 1px solid #562356; 
+            margin-top: 35px;
+        }
+        .selected{
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <!--拖拽对象-->
+    <div id="target" draggable="true"></div>
+    <!--投放区-->
+    <div id="section"></div>
+</body>
+</html>
+<script src="./html5-drag.js"></script>

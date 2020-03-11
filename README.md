@@ -333,6 +333,17 @@
 ```
 # interview questions
 ```
+├── 2020-3-11
+│   ├── html-dataTransfer.js                html5dataTransfer属性应用
+│   ├── html5-drag.js                       html5拖拽
+│   ├── js-drag.js                          传统拖拽
+│   
+├── 2020-3-8
+│   ├── lazyload.js                         关于路由的懒加载和代码分割
+│   
+├── 2020-3-7
+│   ├── router.js                           前端路由的理解
+│   
 ├── 2020-3-1
 │   ├── bom.js                              Bom的要点
 │   ├── js-promise.js                       手写一个promise
