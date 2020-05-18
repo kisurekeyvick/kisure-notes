@@ -114,6 +114,41 @@ function LinkedList() {
         }
     }
 
+    this.rotateList = function(k) {
+        let start = 1;
+        let fast = head;
+        
+        /** 先让快指针走 n 给个位置 */
+        while (start < k && fast.next !== null) {
+            fast = fast.next;
+            start ++;
+        }
+
+        /**
+         * 循环结束后如果 start < k 表示 k 整个链表还要长 旋转后还是原链表
+         * 如果 fast.next = null 表示 k 正好等于原链表的长度此时也不需要旋转
+         */
+        if (fast.next === null || start < k) {
+            return head;
+        }
+
+        /** 倒数第 k + 1个节点 */
+        let pre = fast;
+        /** 旋转后的头结点 */
+        let newHead = fast.next;
+
+        while (fast.next !== null) {
+            fast = fast.next;
+        }
+
+        /** 原链表的最后一个节点指向原来的头节点 */
+        fast.next = head;
+        /** 将旋转的节点的上一个节点变为尾节点 */
+        pre.next = null;
+
+        return newHead;
+    }
+
     // 移除
     this.removeAt = function(position) {
         // 检查是否越界，超过链表长度或是小于0肯定不符合逻辑的
@@ -142,6 +177,45 @@ function LinkedList() {
         } else {
             return null;
         }
+    }
+
+    this.getMid = function() {
+        if (head === null) {
+            return null;
+        }
+
+        let slow = head;
+        let fast = head;
+
+        /** fast.next = null 表示 fast 是链表的尾节点 */
+        while(fast != null && fast.next !== null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+
+        return slow;
+    }
+
+    this.isloopList = function() {
+        if (head === null) {
+            return null;
+        }
+
+        let slow = head;
+        let fast = head;
+
+        /** 如果不是循环链表那么一定有尾部节点 此节点 node.next = null */
+        while(slow !== null && fast !== null && fast.next !== null) {
+            if (fast === slow || fast.next === slow) {
+                return true;
+            }
+
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+
+        /** 如果不是循环链表返回 false */
+        return false;
     }
 
     // 找到相关位置

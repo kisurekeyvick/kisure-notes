@@ -140,6 +140,7 @@ BinarySearchTree.prototype.postOrderTraverse = function(callback) {
 
 //输出结果： 3 6 5 8 10 9 7 12 14 13 18 25 20 15 11 
 
+
 /** 
  * 搜索树中的值
  * 
@@ -180,7 +181,7 @@ BinarySearchTree.prototype.max = function() {
 };
 
 // 搜索某个特定的值
-BinarySearchTree.prototype.search = function() {
+BinarySearchTree.prototype.search = function(key) {
     var searchNode = function(node, key){ 
         if (node === null){ //{2} 
             return false; 

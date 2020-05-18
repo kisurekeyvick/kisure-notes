@@ -164,7 +164,14 @@ type UnPromisify<T> = T extends PromiseType<infer U> ? U : never;
     };
  */
 // 举个例子
+interface Person {
+    name: string;
+    age: number;
+    location?: string;
+}
+
 type IMe = Pick<Person, 'name' | 'age'>;
+
 const me: IMe = {
     name: 'kisure',
     age: 27
@@ -184,10 +191,18 @@ const me: IMe = {
  */
 // 举个例子
 type IRecord = Record<'name' | 'age', string>;
+
 const curRecord: IRecord = {
     name: 'kisure',
     age:'123'
 };
+
+interface Person {
+    name: string;
+    age: number;
+    location?: string;
+}
+
 type T11 = Record<'a' | 'b' | 'c', Person>; // { a: Person; b: Person; c: Person; }
 
 
