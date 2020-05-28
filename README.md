@@ -18,6 +18,19 @@
 │   ├── string-to-integer-atoi.js   字符串转换整数
 │   ├── three-number-sum.js         三数之和
 │   ├── two-number-sum.js           两数之间的和
+│   ├── 2020-5-27.js                大小为 K 且平均值大于等于阈值的子数组数目
+│
+```
+
+# rxjs 框架
+```
+├── rxjs
+│   ├── observable.js               数据流
+│   ├── observer.js                 观察者
+│   ├── operators.js                操作符
+│   ├── subject.js                  主题 主题的几个变体
+│   ├── subscription.js             订阅 退订
+│   ├── operators-usage-observable.js       几个创建数据流的api
 │
 ```
 
@@ -339,6 +352,12 @@
 ```
 # interview questions
 ```
+├── 2020-5-28
+│   ├── web-performance.js                  前端性能优化
+│   ├── webpack4.js                         webpack优化
+│   ├── webScoket.js                        高并发
+│   ├── nginx-gzip.js                       nginx gzip介绍和配置
+│
 ├── 2020-3-11
 │   ├── html-dataTransfer.js                html5dataTransfer属性应用
 │   ├── html5-drag.js                       html5拖拽
