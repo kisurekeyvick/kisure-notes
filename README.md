@@ -19,6 +19,7 @@
 │   ├── three-number-sum.js         三数之和
 │   ├── two-number-sum.js           两数之间的和
 │   ├── 2020-5-27.js                大小为 K 且平均值大于等于阈值的子数组数目
+│   ├── 2020-5-29.js                字符串解码
 │
 ```
 
@@ -352,10 +353,16 @@
 ```
 # interview questions
 ```
+├── 2020-5-29
+│   ├── http-cache.js                       http缓存
+│   ├── service-worker.js                   浏览器缓存
+│   ├── web-worker.js
+│   ├── Accept-Encoding.js
+│   
 ├── 2020-5-28
 │   ├── web-performance.js                  前端性能优化
 │   ├── webpack4.js                         webpack优化
-│   ├── webScoket.js                        高并发
+│   ├── webScoket.js                        h5双向通讯
 │   ├── nginx-gzip.js                       nginx gzip介绍和配置
 │
 ├── 2020-3-11
