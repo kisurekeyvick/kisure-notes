@@ -71,6 +71,13 @@
 │       ├── organization&deployment.js      模块路径解析规则, package包, 工程目录
 │  
 ```
+# GIT文件目录说明
+```
+├── GIt
+│   ├── Git.txt    git操作命令介绍
+│   ├── Git_2.txt  几种异常情况提供一些解决方案
+│ 
+```
 
 # H5文件目录说明
 ```
@@ -353,6 +360,9 @@
 ```
 # interview questions
 ```
+├── 2020-6-12
+│   ├── 
+│ 
 ├── 2020-5-29
 │   ├── http-cache.js                       http缓存
 │   ├── service-worker.js                   浏览器缓存
