@@ -16,8 +16,8 @@ test().then(res =>console.log(res));
  * generator函数是不会自动执行的，每一次调用它的next方法，会停留在下一个yield的位置。
  * */
 function * Test_G() {
-    const data = yield getData();
-    console.log('data: ', data);
+    const data1 = yield getData();
+    console.log('data1: ', data1);
     const data2 = yield getData();
     console.log('data2: ', data2);
     return'success';
